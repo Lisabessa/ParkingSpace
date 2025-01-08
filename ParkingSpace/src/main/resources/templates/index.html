@@ -40,10 +40,10 @@
             <th scope="row" class="text-black" th:text="${user.phone_number}">Номер телефона отсутствует</th>
             <th scope="row" class="text-black" th:text="${user.password}">Пароль отсутствует</th>
             <th scope="row" class="text-black" th:text="${user.role_id}">Роль отсутствует</th>
-<!--            <td>-->
-<!--                <a th:href="@{'/edit/'+${student.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>-->
-<!--                <a th:href="@{'/delete/'+${student.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>-->
-<!--            </td>-->
+            <td>
+                <a th:href="@{'/edit/'+${student.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
+                <a th:href="@{'/delete/'+${student.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -59,13 +59,13 @@
             getRowsColumn()
         </script>
     </p>
-<!--    <blockquote class="blockquote text-center">-->
-<!--        <a href="/new">-->
-<!--            <button type="button" class="btn btn-primary" data-togge="button" aria-pressed="false" autocomplete="off">-->
-<!--                Добавить студента-->
-<!--            </button>-->
-<!--        </a>-->
-<!--    </blockquote>-->
+    <blockquote class="blockquote text-center">
+        <a href="/new">
+            <button type="button" class="btn btn-primary" data-togge="button" aria-pressed="false" autocomplete="off">
+                Добавить студента
+            </button>
+        </a>
+    </blockquote>
 </div>
 <script type="text/javascript">
     function clearSearch() {

@@ -8,7 +8,7 @@ import lombok.Getter;
 @Setter
 @Entity
 public class User {
-    private int id;
+    private Long id;
 
     @Getter
     private String first_name;
@@ -22,12 +22,16 @@ public class User {
     @Getter
     private String password;
 
-    @Getter
-    private int role_id;
+//    @Getter
+//    private int role_id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
+    public Long getId() {
         return id;
     }
 }
