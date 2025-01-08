@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class UserController {
 
-//    @Autowired
-//    private UserService service;
+    @Autowired
+    private UserService service;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model, @Param("keyword") String keyword) {
+        List<User> listUsers = service.listAll(keyword);
+        model.addAttribute("listUsers", listUsers);
+        model.addAttribute("keyword", keyword);
         return "index";
     }
 }
