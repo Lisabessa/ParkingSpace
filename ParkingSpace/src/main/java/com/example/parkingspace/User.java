@@ -11,6 +11,15 @@ public class User {
     private Long id;
 
     @Getter
+    private String vehicle_registration_number;
+
+    @Getter
+    private String vehicle_model;
+
+    @Getter
+    private String vehicle_color;
+
+    @Getter
     private String first_name;
 
     @Getter
@@ -18,16 +27,6 @@ public class User {
 
     @Getter
     private String phone_number;
-
-    @Getter
-    private String password;
-
-//    @Getter
-//    private int role_id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
