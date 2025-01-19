@@ -1,10 +1,13 @@
 package com.example.parkingspace;
 
 import java.util.List;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,24 @@ public class AppController {
         model.addAttribute("keyword", keyword);
         return "index";
     }
+
+    @RequestMapping("/newUser")
+    public String ViewHomePage2(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "newUser";
+    }
+
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "newUser";
+        }
+        service.save(user);
+        return "redirect:/";
+    }
+
+
 
 }
 
