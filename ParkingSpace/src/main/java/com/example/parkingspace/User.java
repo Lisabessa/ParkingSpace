@@ -13,27 +13,25 @@ public class User {
 
     @NotBlank(message = "Регистрационный номер автомобиля не должен быть пустым")
     @Getter
-    private String vehicle_registration_number;
+    private String vehicleRegistrationNumber;
 
-    @NotBlank(message = "Марка автомобиля не должна быть пустой")
     @Getter
-    private String vehicle_model;
+    private String vehicleModel;
 
-    @NotBlank(message = "Цвет автомобиля не должен быть пустым")
     @Getter
-    private String vehicle_color;
+    private String vehicleColor;
 
     @NotBlank(message = "Имя не должно быть пустым")
     @Getter
-    private String first_name;
+    private String firstName;
 
     @NotBlank(message = "Фамилия не должна быть пустой")
     @Getter
-    private String last_name;
+    private String lastName;
 
     @NotBlank(message = "Номер телефона не должен быть пустым")
     @Getter
-    private String phone_number;
+    private String phoneNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

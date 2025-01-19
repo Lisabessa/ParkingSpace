@@ -1,6 +1,8 @@
 package com.example.parkingspace;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,20 @@ public class UserService {
 
     public void delete(String id){
         repo.deleteById(Long.valueOf(id));
+    }
+
+    public Optional<User> findDuplicates(User user){
+         return repo.findByVehicleRegistrationNumber(user.getVehicleRegistrationNumber());
+    }
+
+    public void updateUser(User user) throws Exception {
+        User existingUser = repo.findById(user.getId()).orElseThrow(() -> new RuntimeException("Пользователь не найден."));
+        existingUser.setVehicleRegistrationNumber(user.getVehicleRegistrationNumber());
+        existingUser.setVehicleModel(user.getVehicleModel());
+        existingUser.setVehicleColor(user.getVehicleColor());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setPhoneNumber(user.getPhoneNumber());
+        repo.save(existingUser);
     }
 }

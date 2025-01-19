@@ -36,16 +36,16 @@
         <tbody>
         <tr th:each="user: ${listUsers}">
             <th scope="row" class="text-black" th:text="${user.id}">ID пользователя отстутсвует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicle_registration_number}">Регистрационный номер автомобиля отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicle_model}">Модель автомобиля отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicle_color}">Цвет прозрачный)))</th>
-            <th scope="row" class="text-black" th:text="${user.first_name}">Имя пользователя отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.last_name}">Фамилия пользователя отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.phone_number}">Номер телефона отсутствует</th>
-<!--            <td>-->
-<!--                <a th:href="@{'/edit/'+${student.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>-->
-<!--                <a th:href="@{'/delete/'+${student.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>-->
-<!--            </td>-->
+            <th scope="row" class="text-black" th:text="${user.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
+            <th scope="row" class="text-black" th:text="${user.vehicleModel}">Модель автомобиля отсутствует</th>
+            <th scope="row" class="text-black" th:text="${user.vehicleColor}">Цвет прозрачный)))</th>
+            <th scope="row" class="text-black" th:text="${user.firstName}">Имя пользователя отсутствует</th>
+            <th scope="row" class="text-black" th:text="${user.lastName}">Фамилия пользователя отсутствует</th>
+            <th scope="row" class="text-black" th:text="${user.phoneNumber}">Номер телефона отсутствует</th>
+            <td>
+                <a th:href="@{'/editUser/'+${user.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
+                <a th:href="@{'/deleteUser/'+${user.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
+            </td>
         </tr>
         </tbody>
     </table>

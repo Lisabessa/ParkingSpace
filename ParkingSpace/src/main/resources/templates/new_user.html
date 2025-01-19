@@ -13,53 +13,54 @@
 <blockquote><h1>Добавить нового пользователя</h1></blockquote>
 <div class="row">
     <div class="col-md-8 offset-md-4">
-        <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+        <form action="#" th:action="@{/createUser}" th:object="${user}" method="post">
             <table>
                 <tr>
                     <td>Регистрационный номер автомобиля:</td>
                     <td>
-                        <input type="text" th:field="*{vehicle_registration_number}">
-                        <span th:if="${#fields.hasErrors('vehicle_registration_number')}" th:errors="*{vehicle_registration_number}">Ошибка</span>
+                        <input type="text" th:field="*{vehicleRegistrationNumber}">
+                        <span th:if="${#fields.hasErrors('vehicleRegistrationNumber')}" th:errors="*{vehicleRegistrationNumber}">Ошибка</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Марка автомобиля:</td>
                     <td>
-                        <input type="text" th:field="*{vehicle_model}">
-                        <span th:if="${#fields.hasErrors('vehicle_model')}" th:errors="*{vehicle_model}">Ошибка</span>
+                        <input type="text" th:field="*{vehicleModel}">
                     </td>
                 </tr>
                 <tr>
                     <td>Цвет автомобиля:</td>
                     <td>
-                        <input type="text" th:field="*{vehicle_color}">
-                        <span th:if="${#fields.hasErrors('vehicle_color')}" th:errors="*{vehicle_color}">Ошибка</span>
+                        <input type="text" th:field="*{vehicleColor}">
                     </td>
                 </tr>
                 <tr>
                     <td>Имя:</td>
                     <td>
-                        <input type="text" th:field="*{first_name}">
-                        <span th:if="${#fields.hasErrors('first_name')}" th:errors="*{first_name}">Ошибка</span>
+                        <input type="text" th:field="*{firstName}">
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Ошибка</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Фамилия:</td>
                     <td>
-                        <input type="text" th:field="*{last_name}">
-                        <span th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}">Ошибка</span>
+                        <input type="text" th:field="*{lastName}">
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Ошибка</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Номер телефона:</td>
                     <td>
-                        <input type="text" th:field="*{phone_number}">
-                        <span th:if="${#fields.hasErrors('phone_number')}" th:errors="*{phone_number}">Ошибка</span>
+                        <input type="text" th:field="*{phoneNumber}">
+                        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Ошибка</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <button type="submit" class="btn btn-primary" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                    </td>
+                    <td>
+                        <a th:href="@{'/'}"><button type="button" class="btn btn-info">Назад</button></a>
                     </td>
                 </tr>
             </table>
@@ -72,11 +73,17 @@
         $('form').on('submit', function (event){
             event.preventDefault();
             let isValid = true;
-            const fields = ['vehicle_registration_number', 'vehicle_model', 'vehicle_color', 'first_name', 'last_name', 'phone_number'];
-            fields.forEach(field => {const inputField = $(`input[name=${field}]`);
-            if (!inputField.val()){
-                inputField.removeClass('is-valid');
-            }});
+            const fields = [
+                'vehicleRegistrationNumber',
+                'firstName',
+                'lastName',
+                'phoneNumber'];
+
+            fields.forEach(field => {
+                const inputField = $(`input[name=${field}]`);
+                if (!inputField.val()){
+                    inputField.removeClass('is-valid');
+                }});
 
             if(isValid) {
                 this.submit();
