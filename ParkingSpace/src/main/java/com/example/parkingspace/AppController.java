@@ -98,5 +98,10 @@ public class AppController {
         return "redirect:/";
     }
 
+    @RequestMapping("/aboutAuthor")
+    public String aboutAuthor() {
+        return "about_author";
+    }
+
 }
 
