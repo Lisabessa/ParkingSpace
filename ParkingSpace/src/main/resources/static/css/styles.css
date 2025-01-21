@@ -3,6 +3,18 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.table_fields{
+    margin: 0 auto;
+}
+
+.table_fields input{
+    width: 300px;
+    padding: 12px 20px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .buttons-container {
     display: flex;
     justify-content: space-between;

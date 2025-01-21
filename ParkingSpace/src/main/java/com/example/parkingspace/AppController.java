@@ -62,7 +62,7 @@ public class AppController {
         }
 
 
-        return "redirect:/";
+        return "redirect:/users";
     }
 
     @RequestMapping("/users/editUser/{id}")
@@ -92,14 +92,14 @@ public class AppController {
             redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных пользователя.");
         }
 
-        return "redirect:/";
+        return "redirect:/users";
 
     }
 
     @RequestMapping("/users/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         userService.delete(String.valueOf(id));
-        return "redirect:/";
+        return "redirect:/users";
     }
 
     @RequestMapping("/parkingSlots")
@@ -110,6 +110,35 @@ public class AppController {
         return "parking_slots";
     }
 
+//    @RequestMapping("/parkingSlots/newParkingSlot")
+//    public String ViewNewParkingSlotPage(Model model) {
+//        User user = new User();
+//        model.addAttribute("user", user);
+//        return "new_user";
+//    }
+
+//    @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
+//    public String createParkingSlot(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+//        if (bindingResult.hasErrors()) {
+//            return "new_user";
+//        }
+//
+//        Optional<User> existingUser = userService.findDuplicates(user);
+//        if (existingUser.isPresent()) {
+//            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
+//            return "new_user";
+//        }
+//
+//        try {
+//            userService.save(user);
+//            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
+//        } catch (Exception e) {
+//            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
+//        }
+//
+//
+//        return "redirect:/";
+//    }
 
     @RequestMapping("/aboutAuthor")
     public String aboutAuthor() {
