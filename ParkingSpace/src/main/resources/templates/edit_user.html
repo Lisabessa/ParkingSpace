@@ -14,7 +14,7 @@
 <blockquote><h1>Отредактировать данные пользователя</h1></blockquote>
 <div class="row">
     <div class="col-md-8 offset-md-4">
-        <form action="#" th:action="@{/saveEditedUser}" th:object="${user}" method="post">
+        <form action="#" th:action="@{/users/saveEditedUser}" th:object="${user}" method="post">
             <table>
                 <tr>
                     <td>ID пользователя:</td>
@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-primary" data-tooggle="button" aria-pressed="false" autocomplete="off">Изменить данные</button>
                     </td>
                     <td>
-                        <a th:href="@{'/'}"><button type="button" class="btn btn-info">Назад</button></a>
+                        <a th:href="@{'/'users}"><button type="button" class="btn btn-info">Назад</button></a>
                     </td>
                 </tr>
             </table>

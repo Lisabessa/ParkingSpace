@@ -16,7 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AppController {
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Autowired
+    private ParkingSlotService parkingSlotService;
 
 
     @RequestMapping("/")
@@ -26,33 +29,33 @@ public class AppController {
 
     @RequestMapping("/users")
     public String ViewUsersPage(Model model, @Param("keyword") String keyword) {
-        List<User> listUsers = service.listAll(keyword);
+        List<User> listUsers = userService.listAll(keyword);
         model.addAttribute("listUsers", listUsers);
         model.addAttribute("keyword", keyword);
         return "users";
     }
 
-    @RequestMapping("/newUser")
+    @RequestMapping("/users/newUser")
     public String ViewNewUserPage(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "new_user";
     }
 
-    @RequestMapping(value = "/createUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
     public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
             return "new_user";
         }
 
-        Optional<User> existingUser = service.findDuplicates(user);
+        Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent()) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
             return "new_user";
         }
 
         try {
-            service.save(user);
+            userService.save(user);
             redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
         } catch (Exception e) {
             redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
@@ -62,28 +65,28 @@ public class AppController {
         return "redirect:/";
     }
 
-    @RequestMapping("/editUser/{id}")
+    @RequestMapping("/users/editUser/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
         ModelAndView mav = new ModelAndView("edit_user");
-        User user = service.getUser(String.valueOf(id));
+        User user = userService.getUser(String.valueOf(id));
         mav.addObject("user", user);
         return mav;
     }
 
-    @RequestMapping(value = "/saveEditedUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/saveEditedUser", method = RequestMethod.POST)
     public String saveEditedUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
             return "edit_user";
         }
 
-        Optional<User> existingUser = service.findDuplicates(user);
+        Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent() && !existingUser.get().getId().equals(user.getId())) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
             return "edit_user";
         }
 
         try {
-            service.updateUser(user);
+            userService.updateUser(user);
             redirectAttrs.addFlashAttribute("success", "Данные пользователя успешно обновлены.");
         } catch (Exception e) {
             redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных пользователя.");
@@ -93,11 +96,20 @@ public class AppController {
 
     }
 
-    @RequestMapping("/deleteUser/{id}")
+    @RequestMapping("/users/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
-        service.delete(String.valueOf(id));
+        userService.delete(String.valueOf(id));
         return "redirect:/";
     }
+
+    @RequestMapping("/parkingSlots")
+    public String ViewParkingSlotsPage(Model model, @Param("keyword") String keyword) {
+        List<ParkingSlot> listParkingSlots = parkingSlotService.listAll(keyword);
+        model.addAttribute("listParkingSlots", listParkingSlots);
+        model.addAttribute("keyword", keyword);
+        return "parking_slots";
+    }
+
 
     @RequestMapping("/aboutAuthor")
     public String aboutAuthor() {

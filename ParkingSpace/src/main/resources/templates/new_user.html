@@ -13,7 +13,7 @@
 <blockquote><h1>Добавить нового пользователя</h1></blockquote>
 <div class="row">
     <div class="col-md-8 offset-md-4">
-        <form action="#" th:action="@{/createUser}" th:object="${user}" method="post">
+        <form action="#" th:action="@{/users/createUser}" th:object="${user}" method="post">
             <table>
                 <tr>
                     <td>Регистрационный номер автомобиля:</td>
@@ -60,7 +60,7 @@
                         <button type="submit" class="btn btn-primary" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
                     </td>
                     <td>
-                        <a th:href="@{'/'}"><button type="button" class="btn btn-info">Назад</button></a>
+                        <a th:href="@{'/users'}"><button type="button" class="btn btn-info">Назад</button></a>
                     </td>
                 </tr>
             </table>
