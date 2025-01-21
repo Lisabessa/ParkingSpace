@@ -68,7 +68,7 @@ public class AppController {
     @RequestMapping("/users/editUser/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
         ModelAndView mav = new ModelAndView("edit_user");
-        User user = userService.getUser(String.valueOf(id));
+        User user = userService.getUser(String.valueOf(id)); // TODO: Нужно что бы была проверка существования элемента - если нет можно выдавать false а при обработке и постронении страницы выдавать на пример 404 но не 500. 500 ошибка поломка приложения на стороне клиента (в веб это недопустимо).
         mav.addObject("user", user);
         return mav;
     }
