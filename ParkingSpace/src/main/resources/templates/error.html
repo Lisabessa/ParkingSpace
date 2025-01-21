@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система бронирования мест на парковке</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'ВОЗНИКЛА ОШИБКА ' + ${code}">Код ошибки</h1>
+    <p th:text="${message}">Сообщение об ошибке</p>
+</div>
+
+</body>
+</html>
