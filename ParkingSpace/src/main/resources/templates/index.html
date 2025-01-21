@@ -3,77 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Система бронирования мест на парковке</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<div class="bg-image"
-     style="background-image: url('/images/background_parking.jpg'); background-repeat: no-repeat; background-size: cover; height: 100vh; overflow: auto">
-    <blockquote class="blockquote text-center"><h1>Пользователи системы бронирования мест на парковке</h1></blockquote>
-    <a th:href="@{'/aboutAuthor'}"><button type="button" class="btn btn-info">Об авторе</button></a>
-    <div class="row">
-        <div class="col-md-8 offset-md-4">
-            <h4>Поиск пользователя по любому критерию:</h4>
-            <form th:action="@{/}">
-                <input type="text" name="keyword" id="keyword" size="70" th:value="${keyword}" required/>
-                <input type="submit" class="btn btn-success btn-sm" value="Поиск"/>
-                <input type="button" class="btn btn-warning btn-sm" value="Очистить" id="btnClear"
-                       onclick="clearSearch()"/>
-            </form>
-        </div>
+<div class="container_main">
+    <div class="container2">
+        <h1>Система бронирования мест на парковке</h1>
+        <a th:href="@{'/aboutAuthor'}"><button type="button" class="button2">Об авторе</button></a>
+        <a th:href="@{'/users'}"><button type="button" class="button1">Пользователи</button></a>
+        <a th:href="@{'/parkingSlots'}"><button type="button" class="button1">Парковочные места</button></a>
+        <a th:href="@{'/reservations'}"><button type="button" class="button1">Бронирования</button></a>
     </div>
-    <table th:color="black" id="1" class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th scope="col">ID пользователя</th>
-            <th scope="col">Регистрационный номер автомобиля</th>
-            <th scope="col">Модель автомобиля</th>
-            <th scope="col">Цвет автомобиля</th>
-            <th scope="col">Имя</th>
-            <th scope="col">Фамилия</th>
-            <th scope="col">Номер телефона</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${listUsers}">
-            <th scope="row" class="text-black" th:text="${user.id}">ID пользователя отстутсвует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicleModel}">Модель автомобиля отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.vehicleColor}">Цвет прозрачный)))</th>
-            <th scope="row" class="text-black" th:text="${user.firstName}">Имя пользователя отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.lastName}">Фамилия пользователя отсутствует</th>
-            <th scope="row" class="text-black" th:text="${user.phoneNumber}">Номер телефона отсутствует</th>
-            <td>
-                <a th:href="@{'/editUser/'+${user.id}}"><button type="button" class="btn btn-info">Редактировать</button></a>
-                <a th:href="@{'/deleteUser/'+${user.id}}"><button type="button" class="btn btn-danger">Удалить</button></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <p class="text-black">
-        <script type="text/javascript">
-            function getRowsColumn() {
-                let table = document.getElementById('1')
-                let tBody = table.querySelector('tbody')
-                const count = tBody.querySelectorAll('tr').length;
-                document.write('Количество пользователей в таблице: ' + count)
-            }
-
-            getRowsColumn()
-        </script>
-    </p>
-    <blockquote class="blockquote text-center">
-        <a href="/newUser">
-            <button type="button" class="btn btn-primary" data-togge="button" aria-pressed="false" autocomplete="off">
-                Добавить нового пользователя
-            </button>
-        </a>
-    </blockquote>
 </div>
-<script type="text/javascript">
-    function clearSearch() {
-        window.location = "[[@{/}]]";
-    }
-</script>
 </body>
 </html>

@@ -20,11 +20,16 @@ public class AppController {
 
 
     @RequestMapping("/")
-    public String ViewHomePage(Model model, @Param("keyword") String keyword) {
+    public String ViewHomePage(Model model) {
+        return "index";
+    }
+
+    @RequestMapping("/users")
+    public String ViewUsersPage(Model model, @Param("keyword") String keyword) {
         List<User> listUsers = service.listAll(keyword);
         model.addAttribute("listUsers", listUsers);
         model.addAttribute("keyword", keyword);
-        return "index";
+        return "users";
     }
 
     @RequestMapping("/newUser")
