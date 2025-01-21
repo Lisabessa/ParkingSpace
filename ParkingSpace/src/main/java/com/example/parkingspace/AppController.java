@@ -110,35 +110,72 @@ public class AppController {
         return "parking_slots";
     }
 
-//    @RequestMapping("/parkingSlots/newParkingSlot")
-//    public String ViewNewParkingSlotPage(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "new_user";
-//    }
+    @RequestMapping("/parkingSlots/newParkingSlot")
+    public String ViewNewParkingSlotPage(Model model) {
+        ParkingSlot parkingSlot = new ParkingSlot();
+        model.addAttribute("parkingSlot", parkingSlot);
+        return "new_parking_slot";
+    }
 
-//    @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
-//    public String createParkingSlot(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_user";
-//        }
-//
-//        Optional<User> existingUser = userService.findDuplicates(user);
-//        if (existingUser.isPresent()) {
-//            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-//            return "new_user";
-//        }
-//
-//        try {
-//            userService.save(user);
-//            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
-//        } catch (Exception e) {
-//            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
-//        }
-//
-//
-//        return "redirect:/";
-//    }
+    @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
+    public String createParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+        if (bindingResult.hasErrors()) {
+            return "new_parking_slot";
+        }
+
+        Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
+        if (existingParkingSlot.isPresent()) {
+            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
+            return "new_parking_slot";
+        }
+
+        try {
+            parkingSlotService.save(parkingSlot);
+            redirectAttrs.addFlashAttribute("success", "Новый парковочный слот успешно создан.");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового парковочного слота.");
+        }
+
+
+        return "redirect:/parkingSlots";
+    }
+
+    @RequestMapping("/parkingSlots/editParkingSlot/{id}")
+    public ModelAndView editParkingSlot(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("edit_parking_slot");
+        ParkingSlot parkingSlot = parkingSlotService.getParkingSlot(String.valueOf(id));
+        mav.addObject("parkingSlot", parkingSlot);
+        return mav;
+    }
+
+    @RequestMapping(value = "/parkingSlots/saveEditedParkingSlot", method = RequestMethod.POST)
+    public String saveEditedParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+        if (bindingResult.hasErrors()) {
+            return "edit_parking_slot";
+        }
+
+        Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
+        if (existingParkingSlot.isPresent() && !existingParkingSlot.get().getId().equals(parkingSlot.getId())) {
+            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
+            return "edit_parking_slot";
+        }
+
+        try {
+            parkingSlotService.updateParkingSlot(parkingSlot);
+            redirectAttrs.addFlashAttribute("success", "Данные о парковочном слоте успешно обновлены.");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных о парковочном слоте.");
+        }
+
+        return "redirect:/parkingSlots";
+
+    }
+
+    @RequestMapping("/parkingSlots/deleteParkingSlot/{id}")
+    public String deleteParkingSlot(@PathVariable int id) {
+        parkingSlotService.delete(String.valueOf(id));
+        return "redirect:/parkingSlots";
+    }
 
     @RequestMapping("/aboutAuthor")
     public String aboutAuthor() {
