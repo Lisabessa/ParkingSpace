@@ -21,6 +21,9 @@ public class AppController {
     @Autowired
     private ParkingSlotService parkingSlotService;
 
+    @Autowired
+    private ReservationService reservationService;
+
 
     @RequestMapping("/")
     public String ViewHomePage(Model model) {
@@ -180,6 +183,19 @@ public class AppController {
     @RequestMapping("/aboutAuthor")
     public String aboutAuthor() {
         return "about_author";
+    }
+
+    @RequestMapping("/reservations")
+    public String ViewReservationsPage(Model model) {
+        List<Reservation> listReservations = reservationService.listAll();
+        model.addAttribute("listReservations", listReservations);
+        return "reservations";
+    }
+
+    @RequestMapping("/reservations/deleteReservation/{id}")
+    public String deleteReservation(@PathVariable int id) {
+        reservationService.delete(String.valueOf(id));
+        return "redirect:/reservations";
     }
 
 }
