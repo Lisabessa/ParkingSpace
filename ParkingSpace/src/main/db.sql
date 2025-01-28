@@ -21,7 +21,7 @@ CREATE TABLE reservations (
                               start_time TIMESTAMP NOT NULL,
                               end_time TIMESTAMP NOT NULL,
                               user_id INTEGER REFERENCES users(id),
-                              slot_id INTEGER REFERENCES parking_slots(id),
+                              parking_slot_id INTEGER REFERENCES parking_slots(id),
                               status VARCHAR(20) DEFAULT 'active',
                               price DOUBLE PRECISION
 );
