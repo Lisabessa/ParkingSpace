@@ -198,5 +198,35 @@ public class AppController {
         return "redirect:/reservations";
     }
 
+    @RequestMapping("/reservations/newReservation")
+    public String ViewNewReservationPage(Model model) {
+        Reservation reservation = new Reservation();
+        model.addAttribute("reservation", reservation);
+        return "new_reservation";
+    }
+
+    @RequestMapping(value = "/reservations/createReservation", method = RequestMethod.POST)
+    public String createReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+        if (bindingResult.hasErrors()) {
+            return "new_reservation";
+        }
+
+        //Optional<Reservation> existingReservation = reservationService.findDuplicates(reservation);
+//        if (existingReservation.isPresent()) {
+//            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
+//            return "new_user";
+//        }
+//
+//        try {
+//            userService.save(user);
+//            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
+//        } catch (Exception e) {
+//            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
+//        }
+
+
+        return "redirect:/reservations";
+    }
+
 }
 

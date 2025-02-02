@@ -14,6 +14,10 @@ public class ReservationService {
         return repo.findAll();
     }
 
+    public void save(Reservation reservation) {
+        repo.save(reservation);
+    }
+
     public void delete(String id) {
         repo.deleteById(Long.valueOf(id));
     }
