@@ -18,14 +18,14 @@
                 <tr>
                     <td>Время начала бронирования:</td>
                     <td>
-                        <input type="text" th:field="*{startTime}">
+                        <input type="datetime-local" th:field="*{startTime}">
                         <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Ошибка</span>
                     </td>
                 </tr>
                 <tr>
                     <td>Время окончания бронирования:</td>
                     <td>
-                        <input type="text" th:field="*{endTime}">
+                        <input type="datetime-local" th:field="*{endTime}">
                         <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Ошибка</span>
                     </td>
                 </tr>

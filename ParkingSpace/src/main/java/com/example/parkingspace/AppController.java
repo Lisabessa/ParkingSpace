@@ -210,20 +210,12 @@ public class AppController {
         if (bindingResult.hasErrors()) {
             return "new_reservation";
         }
-
-        //Optional<Reservation> existingReservation = reservationService.findDuplicates(reservation);
-//        if (existingReservation.isPresent()) {
-//            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-//            return "new_user";
-//        }
-//
-//        try {
-//            userService.save(user);
-//            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
-//        } catch (Exception e) {
-//            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
-//        }
-
+        try {
+            reservationService.save(reservation);
+            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
+        }
 
         return "redirect:/reservations";
     }
