@@ -41,7 +41,9 @@ public class AppController {
     @RequestMapping("/users/newUser")
     public String ViewNewUserPage(Model model) {
         User user = new User();
-        model.addAttribute("user", user);
+        model.addAttribute("entity", user);
+        model.addAttribute("action", "/users/createUser");
+        model.addAttribute("base_link", "/users");
         return "new_user";
     }
 
@@ -116,7 +118,9 @@ public class AppController {
     @RequestMapping("/parkingSlots/newParkingSlot")
     public String ViewNewParkingSlotPage(Model model) {
         ParkingSlot parkingSlot = new ParkingSlot();
-        model.addAttribute("parkingSlot", parkingSlot);
+        model.addAttribute("entity", parkingSlot);
+        model.addAttribute("action", "/parkingSlots/createParkingSlot");
+        model.addAttribute("base_link", "/parkingSlots");
         return "new_parking_slot";
     }
 
@@ -201,7 +205,9 @@ public class AppController {
     @RequestMapping("/reservations/newReservation")
     public String ViewNewReservationPage(Model model) {
         Reservation reservation = new Reservation();
-        model.addAttribute("reservation", reservation);
+        model.addAttribute("entity", reservation);
+        model.addAttribute("action", "/reservations/createReservation");
+        model.addAttribute("base_link", "/reservations");
         return "new_reservation";
     }
 

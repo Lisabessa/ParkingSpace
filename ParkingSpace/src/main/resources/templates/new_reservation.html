@@ -12,54 +12,7 @@
 <div class="container_main">
     <div class="container3">
         <h1>Добавить новое бронирование</h1>
-
-        <form th:action="@{/reservations/createReservation}" th:object="${reservation}" method="post">
-            <table class="table_fields">
-                <tr>
-                    <td>Время начала бронирования:</td>
-                    <td>
-                        <input type="datetime-local" th:field="*{startTime}">
-                        <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Время окончания бронирования:</td>
-                    <td>
-                        <input type="datetime-local" th:field="*{endTime}">
-                        <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>ID пользователя:</td>
-                    <td>
-                        <input type="text" th:field="*{user.id}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>ID парковочного слота:</td>
-                    <td>
-                        <input type="text" th:field="*{parkingSlot.id}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Статус:</td>
-                    <td>
-                        <input type="text" th:field="*{status}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Стоимость парковки:</td>
-                    <td>
-                        <input type="text" th:field="*{price}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div th:replace="creation_form :: form(entity=${entity}, action=${action})"></div>
         <a th:href="@{'/reservations'}"><button class="button2">Назад</button></a>
     </div>
 </div>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма для создания</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <form th:action="@{${action}}" th:object="${entity}" method="post">
+        <table class="table_fields">
+
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Регистрационный номер автомобиля:</td>
+                <td>
+                    <input type="text" th:field="*{vehicleRegistrationNumber}">
+                    <span th:if="${#fields.hasErrors('vehicleRegistrationNumber')}" th:errors="*{vehicleRegistrationNumber}">Ошибка</span>
+              </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Марка автомобиля:</td>
+                <td>
+                    <input type="text" th:field="*{vehicleModel}">
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Цвет автомобиля:</td>
+                <td>
+                    <input type="text" th:field="*{vehicleColor}">
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Имя:</td>
+                <td>
+                    <input type="text" th:field="*{firstName}">
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Ошибка</span>
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Фамилия:</td>
+                <td>
+                    <input type="text" th:field="*{lastName}">
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Ошибка</span>
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
+                <td>Номер телефона:</td>
+                <td>
+                    <input type="text" th:field="*{phoneNumber}">
+                    <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Ошибка</span>
+                </td>
+            </tr>
+
+
+
+            <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">
+                <td>Код слота:</td>
+                <td>
+                  <input type="text" th:field="*{slotCode}">
+                  <span th:if="${#fields.hasErrors('slotCode')}" th:errors="*{slotCode}">Ошибка</span>
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">
+                <td>Слот свободен:</td>
+                <td>
+                  <input type="text" th:field="*{isAvailable}">
+                </td>
+            </tr>
+
+
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>Время начала бронирования:</td>
+                <td>
+                    <input type="datetime-local" th:field="*{startTime}">
+                    <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Ошибка</span>
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>Время окончания бронирования:</td>
+                <td>
+                    <input type="datetime-local" th:field="*{endTime}">
+                    <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Ошибка</span>
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>ID пользователя:</td>
+                <td>
+                    <input type="text" th:field="*{user.id}">
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>ID парковочного слота:</td>
+                <td>
+                    <input type="text" th:field="*{parkingSlot.id}">
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>Статус:</td>
+                <td>
+                    <input type="text" th:field="*{status}">
+                </td>
+            </tr>
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
+                <td>Стоимость парковки:</td>
+                <td>
+                    <input type="text" th:field="*{price}">
+                </td>
+            </tr>
+
+
+            <tr>
+              <td>
+                <button type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+              </td>
+            </tr>
+        </table>
+
+    </form>
+
+<!--    <a th:href="@{${base_link}}"><button class="button2">Назад</button></a>-->
+</body>
+</html>

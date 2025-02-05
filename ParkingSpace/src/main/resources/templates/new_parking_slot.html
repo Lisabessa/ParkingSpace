@@ -12,29 +12,7 @@
 <div class="container_main">
     <div class="container3">
         <h1>Добавить новый парковочный слот</h1>
-
-        <form th:action="@{/parkingSlots/createParkingSlot}" th:object="${parkingSlot}" method="post">
-            <table class="table_fields">
-                <tr>
-                    <td>Код слота:</td>
-                    <td>
-                        <input type="text" th:field="*{slotCode}">
-                        <span th:if="${#fields.hasErrors('slotCode')}" th:errors="*{slotCode}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Слот свободен:</td>
-                    <td>
-                        <input type="text" th:field="*{isAvailable}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div th:replace="creation_form :: form(entity=${entity}, action=${action})"></div>
         <a th:href="@{'/parkingSlots'}"><button class="button2">Назад</button></a>
     </div>
 </div>

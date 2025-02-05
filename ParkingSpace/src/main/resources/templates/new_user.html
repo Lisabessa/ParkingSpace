@@ -12,56 +12,7 @@
 <div class="container_main">
     <div class="container3">
         <h1>Добавить нового пользователя</h1>
-
-        <form th:action="@{/users/createUser}" th:object="${user}" method="post">
-            <table class="table_fields">
-                <tr>
-                    <td>Регистрационный номер автомобиля:</td>
-                    <td>
-                        <input type="text" th:field="*{vehicleRegistrationNumber}">
-                        <span th:if="${#fields.hasErrors('vehicleRegistrationNumber')}" th:errors="*{vehicleRegistrationNumber}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Марка автомобиля:</td>
-                    <td>
-                        <input type="text" th:field="*{vehicleModel}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Цвет автомобиля:</td>
-                    <td>
-                        <input type="text" th:field="*{vehicleColor}">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Имя:</td>
-                    <td>
-                        <input type="text" th:field="*{firstName}">
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Фамилия:</td>
-                    <td>
-                        <input type="text" th:field="*{lastName}">
-                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Номер телефона:</td>
-                    <td>
-                        <input type="text" th:field="*{phoneNumber}">
-                        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Ошибка</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div th:replace="creation_form :: form(entity=${entity}, action=${action})"></div>
         <a th:href="@{'/users'}"><button class="button2">Назад</button></a>
     </div>
 </div>
