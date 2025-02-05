@@ -1,7 +1,8 @@
 package com.example.parkingspace;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +21,11 @@ public class Reservation {
         return id;
     }
 
+    @NotNull(message = "Время начала бронирования не должно быть пустым")
     @Getter
     private LocalDateTime startTime;
 
+    @NotNull(message = "Время окончания бронирования не должно быть пустым")
     @Getter
     private LocalDateTime endTime;
 

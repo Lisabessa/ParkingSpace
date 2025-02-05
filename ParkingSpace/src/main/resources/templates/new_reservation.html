@@ -64,29 +64,27 @@
     </div>
 </div>
 
-<!--<script>-->
-<!--    $(document).ready(function (){-->
-<!--        $('form').on('submit', function (event){-->
-<!--            event.preventDefault();-->
-<!--            let isValid = true;-->
-<!--            const fields = [-->
-<!--                'vehicleRegistrationNumber',-->
-<!--                'firstName',-->
-<!--                'lastName',-->
-<!--                'phoneNumber'];-->
+<script>
+    $(document).ready(function (){
+        $('form').on('submit', function (event){
+            event.preventDefault();
+            let isValid = true;
+            const fields = [
+                'startTime',
+                'endTime'];
 
-<!--            fields.forEach(field => {-->
-<!--                const inputField = $(`input[name=${field}]`);-->
-<!--                if (!inputField.val()){-->
-<!--                    inputField.removeClass('is-valid');-->
-<!--                }});-->
+            fields.forEach(field => {
+                const inputField = $(`input[name=${field}]`);
+                if (!inputField.val()){
+                    inputField.removeClass('is-valid');
+                }});
 
-<!--            if(isValid) {-->
-<!--                this.submit();-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
+            if(isValid) {
+                this.submit();
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
