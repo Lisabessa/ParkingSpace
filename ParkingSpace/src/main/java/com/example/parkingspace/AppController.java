@@ -1,7 +1,5 @@
 package com.example.parkingspace;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,19 +45,19 @@ public class AppController {
         model.addAttribute("action", "/users/createUser");
         model.addAttribute("base_link", "/users");
         model.addAttribute("option", "create");
-        return "new_entry";
+        return "change_entity";
     }
 
     @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
     public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_entry";
+            return "change_entity";
         }
 
         Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent()) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-            return "new_entry";
+            return "change_entity";
         }
 
         try {
@@ -75,7 +73,7 @@ public class AppController {
 
     @RequestMapping("/users/editUser/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("new_entry");
+        ModelAndView mav = new ModelAndView("change_entity");
         User user = userService.getUser(String.valueOf(id)); // TODO: Нужно что бы была проверка существования элемента - если нет можно выдавать false а при обработке и постронении страницы выдавать на пример 404 но не 500. 500 ошибка поломка приложения на стороне клиента (в веб это недопустимо).
         mav.addObject("entity", user);
         mav.addObject("action", "/users/saveEditedUser");
@@ -87,13 +85,13 @@ public class AppController {
     @RequestMapping(value = "/users/saveEditedUser", method = RequestMethod.POST)
     public String saveEditedUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_entry";
+            return "change_entity";
         }
 
         Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent() && !existingUser.get().getId().equals(user.getId())) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-            return "new_entry";
+            return "change_entity";
         }
 
         try {
@@ -128,19 +126,19 @@ public class AppController {
         model.addAttribute("action", "/parkingSlots/createParkingSlot");
         model.addAttribute("base_link", "/parkingSlots");
         model.addAttribute("option", "create");
-        return "new_entry";
+        return "change_entity";
     }
 
     @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
     public String createParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_entry";
+            return "change_entity";
         }
 
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
         if (existingParkingSlot.isPresent()) {
             bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "new_entry";
+            return "change_entity";
         }
 
         try {
@@ -156,7 +154,7 @@ public class AppController {
 
     @RequestMapping("/parkingSlots/editParkingSlot/{id}")
     public ModelAndView editParkingSlot(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("new_entry");
+        ModelAndView mav = new ModelAndView("change_entity");
         ParkingSlot parkingSlot = parkingSlotService.getParkingSlot(String.valueOf(id));
         mav.addObject("entity", parkingSlot);
         mav.addObject("action", "/parkingSlots/saveEditedParkingSlot");
@@ -168,13 +166,13 @@ public class AppController {
     @RequestMapping(value = "/parkingSlots/saveEditedParkingSlot", method = RequestMethod.POST)
     public String saveEditedParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_entry";
+            return "change_entity";
         }
 
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
         if (existingParkingSlot.isPresent() && !existingParkingSlot.get().getId().equals(parkingSlot.getId())) {
             bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "new_entry";
+            return "change_entity";
         }
 
         try {
@@ -219,13 +217,13 @@ public class AppController {
         model.addAttribute("action", "/reservations/createReservation");
         model.addAttribute("base_link", "/reservations");
         model.addAttribute("option", "create");
-        return "new_entry";
+        return "change_entity";
     }
 
     @RequestMapping(value = "/reservations/createReservation", method = RequestMethod.POST)
     public String createReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_entry";
+            return "change_entity";
         }
         try {
             reservationService.save(reservation);
@@ -239,7 +237,7 @@ public class AppController {
 
     @RequestMapping("/reservations/editReservation/{id}")
     public ModelAndView editReservation(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("new_entry");
+        ModelAndView mav = new ModelAndView("change_entity");
         Reservation reservation = reservationService.getReservation(String.valueOf(id));
 
         mav.addObject("entity", reservation);
