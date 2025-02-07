@@ -98,7 +98,7 @@
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Время окончания бронирования:</td>
                 <td>
-                    <input type="datetime-local" th:field="*{endTime}">
+                    <input type="datetime-local" th:value="*{endTime}" th:field="*{endTime}">
                     <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Ошибка</span>
                 </td>
             </tr>
