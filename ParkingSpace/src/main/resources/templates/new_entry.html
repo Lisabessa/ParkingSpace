@@ -11,78 +11,18 @@
 <body>
 <div class="container_main">
     <div class="container3">
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.User)}">Добавить нового пользователя</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">Добавить новый парковочный слот</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">Добавить новое бронирование</h1>
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'create'}">Добавить нового пользователя</h1>
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'create'}">Добавить новый парковочный слот</h1>
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'create'}">Добавить новое бронирование</h1>
+
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">Отредактировать данные пользователя</h1>
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">Отредактировать данные о парковочном слоте</h1>
+        <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">Отредактировать данные о бронировании</h1>
 
         <div th:replace="creation_form :: form(entity=${entity}, action=${action})"></div>
         <a th:href="@{${base_link}}"><button class="button2">Назад</button></a>
     </div>
 </div>
-
-<!--<script>-->
-<!--    $(document).ready(function (){-->
-<!--        $('form').on('submit', function (event){-->
-<!--            event.preventDefault();-->
-<!--            let isValid = true;-->
-<!--            const fields = [-->
-<!--                'vehicleRegistrationNumber',-->
-<!--                'firstName',-->
-<!--                'lastName',-->
-<!--                'phoneNumber'];-->
-
-<!--            fields.forEach(field => {-->
-<!--                const inputField = $(`input[name=${field}]`);-->
-<!--                if (!inputField.val()){-->
-<!--                    inputField.removeClass('is-valid');-->
-<!--                }});-->
-
-<!--            if(isValid) {-->
-<!--                this.submit();-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-
-
-<!--<script>-->
-<!--    $(document).ready(function (){-->
-<!--        $('form').on('submit', function (event){-->
-<!--            event.preventDefault();-->
-<!--            let isValid = true;-->
-<!--            const fields = [-->
-<!--                'startTime',-->
-<!--                'endTime'];-->
-
-<!--            fields.forEach(field => {-->
-<!--                const inputField = $(`input[name=${field}]`);-->
-<!--                if (!inputField.val()){-->
-<!--                    inputField.removeClass('is-valid');-->
-<!--                }});-->
-
-<!--            if(isValid) {-->
-<!--                this.submit();-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
-
-<!--<script>-->
-<!--    $(document).ready(function (){-->
-<!--        $('form').on('submit', function (event){-->
-<!--            event.preventDefault();-->
-<!--            let isValid = true;-->
-<!--            const field = 'slotCode'-->
-<!--            const inputField = $(`input[name=${field}]`);-->
-<!--            if (!inputField.val()){-->
-<!--                inputField.removeClass('is-valid');-->
-<!--            }-->
-<!--            if(isValid) {-->
-<!--                this.submit();-->
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 
 </body>
 </html>

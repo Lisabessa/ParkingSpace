@@ -15,6 +15,10 @@ public class ReservationService {
         return repo.findAll();
     }
 
+    public Reservation getReservation(String id) {
+        return repo.findById(Long.valueOf(id)).get();
+    }
+
     public void save(Reservation reservation) {
         repo.save(reservation);
     }
@@ -23,7 +27,7 @@ public class ReservationService {
         repo.deleteById(Long.valueOf(id));
     }
 
-    public void updateUser(Reservation reservation) throws Exception {
+    public void updateReservation(Reservation reservation) throws Exception {
         Reservation existingReservation = repo.findById(reservation.getId()).orElseThrow(() -> new RuntimeException("Бронирование не найдено"));
         existingReservation.setStartTime(reservation.getStartTime());
         existingReservation.setEndTime(reservation.getEndTime());

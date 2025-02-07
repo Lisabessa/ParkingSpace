@@ -1,5 +1,7 @@
 package com.example.parkingspace;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +46,7 @@ public class AppController {
         model.addAttribute("entity", user);
         model.addAttribute("action", "/users/createUser");
         model.addAttribute("base_link", "/users");
+        model.addAttribute("option", "create");
         return "new_entry";
     }
 
@@ -72,22 +75,25 @@ public class AppController {
 
     @RequestMapping("/users/editUser/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("edit_user");
+        ModelAndView mav = new ModelAndView("new_entry");
         User user = userService.getUser(String.valueOf(id)); // TODO: Нужно что бы была проверка существования элемента - если нет можно выдавать false а при обработке и постронении страницы выдавать на пример 404 но не 500. 500 ошибка поломка приложения на стороне клиента (в веб это недопустимо).
-        mav.addObject("user", user);
+        mav.addObject("entity", user);
+        mav.addObject("action", "/users/saveEditedUser");
+        mav.addObject("base_link", "/users");
+        mav.addObject("option", "edit");
         return mav;
     }
 
     @RequestMapping(value = "/users/saveEditedUser", method = RequestMethod.POST)
     public String saveEditedUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "edit_user";
+            return "new_entry";
         }
 
         Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent() && !existingUser.get().getId().equals(user.getId())) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-            return "edit_user";
+            return "new_entry";
         }
 
         try {
@@ -121,6 +127,7 @@ public class AppController {
         model.addAttribute("entity", parkingSlot);
         model.addAttribute("action", "/parkingSlots/createParkingSlot");
         model.addAttribute("base_link", "/parkingSlots");
+        model.addAttribute("option", "create");
         return "new_entry";
     }
 
@@ -149,22 +156,25 @@ public class AppController {
 
     @RequestMapping("/parkingSlots/editParkingSlot/{id}")
     public ModelAndView editParkingSlot(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("edit_parking_slot");
+        ModelAndView mav = new ModelAndView("new_entry");
         ParkingSlot parkingSlot = parkingSlotService.getParkingSlot(String.valueOf(id));
-        mav.addObject("parkingSlot", parkingSlot);
+        mav.addObject("entity", parkingSlot);
+        mav.addObject("action", "/parkingSlots/saveEditedParkingSlot");
+        mav.addObject("base_link", "/parkingSlots");
+        mav.addObject("option", "edit");
         return mav;
     }
 
     @RequestMapping(value = "/parkingSlots/saveEditedParkingSlot", method = RequestMethod.POST)
     public String saveEditedParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "edit_parking_slot";
+            return "new_entry";
         }
 
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
         if (existingParkingSlot.isPresent() && !existingParkingSlot.get().getId().equals(parkingSlot.getId())) {
             bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "edit_parking_slot";
+            return "new_entry";
         }
 
         try {
@@ -208,6 +218,7 @@ public class AppController {
         model.addAttribute("entity", reservation);
         model.addAttribute("action", "/reservations/createReservation");
         model.addAttribute("base_link", "/reservations");
+        model.addAttribute("option", "create");
         return "new_entry";
     }
 
@@ -224,6 +235,41 @@ public class AppController {
         }
 
         return "redirect:/reservations";
+    }
+
+    @RequestMapping("/reservations/editReservation/{id}")
+    public ModelAndView editReservation(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("new_entry");
+        Reservation reservation = reservationService.getReservation(String.valueOf(id));
+
+        mav.addObject("entity", reservation);
+        mav.addObject("action", "/reservations/saveEditedReservation");
+        mav.addObject("base_link", "/reservations");
+        mav.addObject("option", "edit");
+        return mav;
+    }
+
+    @RequestMapping(value = "/reservations/saveEditedReservation", method = RequestMethod.POST)
+    public String saveEditedReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+//        if (bindingResult.hasErrors()) {
+//            return "new_entry";
+//        }
+
+//        Optional<Reservation> existingReservation = reservationService.findDuplicates(reservation);
+//        if (existingReservation.isPresent() && !existingReservation.get().getId().equals(reservation.getId())) {
+//            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
+//            return "new_entry";
+//        }
+
+        try {
+            reservationService.updateReservation(reservation);
+            redirectAttrs.addFlashAttribute("success", "Данные о бронировании успешно обновлены.");
+        } catch (Exception e) {
+            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных о бронировании.");
+        }
+
+        return "redirect:/reservations";
+
     }
 
 }

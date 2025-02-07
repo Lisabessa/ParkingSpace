@@ -9,6 +9,13 @@
     <form th:action="@{${action}}" th:object="${entity}" method="post">
         <table class="table_fields">
 
+            <tr th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">
+                <td>ID пользователя:</td>
+                <td>
+                    <input type="text" th:field="*{id}" readonly="readonly">
+                    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
+                </td>
+            </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.User)}">
                 <td>Регистрационный номер автомобиля:</td>
                 <td>
@@ -52,6 +59,13 @@
 
 
 
+            <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">
+                <td>ID слота:</td>
+                <td>
+                    <input type="text" th:field="*{id}" readonly="readonly">
+                    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
+                </td>
+            </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">
                 <td>Код слота:</td>
                 <td>
@@ -67,6 +81,13 @@
             </tr>
 
 
+            <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">
+                <td>ID бронирования:</td>
+                <td>
+                    <input type="text" th:field="*{id}" readonly="readonly">
+                    <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
+                </td>
+            </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Время начала бронирования:</td>
                 <td>
@@ -109,7 +130,8 @@
 
             <tr>
               <td>
-                <button type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                  <button th:if="${option == 'create'}" type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Сохранить</button>
+                  <button th:if="${option == 'edit'}" type="submit" class="green-btn" data-tooggle="button" aria-pressed="false" autocomplete="off">Изменить данные</button>
               </td>
             </tr>
         </table>
