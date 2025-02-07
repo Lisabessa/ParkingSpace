@@ -44,19 +44,19 @@ public class AppController {
         model.addAttribute("entity", user);
         model.addAttribute("action", "/users/createUser");
         model.addAttribute("base_link", "/users");
-        return "new_user";
+        return "new_entry";
     }
 
     @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
     public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_user";
+            return "new_entry";
         }
 
         Optional<User> existingUser = userService.findDuplicates(user);
         if (existingUser.isPresent()) {
             bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-            return "new_user";
+            return "new_entry";
         }
 
         try {
@@ -121,19 +121,19 @@ public class AppController {
         model.addAttribute("entity", parkingSlot);
         model.addAttribute("action", "/parkingSlots/createParkingSlot");
         model.addAttribute("base_link", "/parkingSlots");
-        return "new_parking_slot";
+        return "new_entry";
     }
 
     @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
     public String createParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_parking_slot";
+            return "new_entry";
         }
 
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
         if (existingParkingSlot.isPresent()) {
             bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "new_parking_slot";
+            return "new_entry";
         }
 
         try {
@@ -208,13 +208,13 @@ public class AppController {
         model.addAttribute("entity", reservation);
         model.addAttribute("action", "/reservations/createReservation");
         model.addAttribute("base_link", "/reservations");
-        return "new_reservation";
+        return "new_entry";
     }
 
     @RequestMapping(value = "/reservations/createReservation", method = RequestMethod.POST)
     public String createReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
         if (bindingResult.hasErrors()) {
-            return "new_reservation";
+            return "new_entry";
         }
         try {
             reservationService.save(reservation);
