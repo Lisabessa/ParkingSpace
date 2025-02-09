@@ -33,9 +33,13 @@ public class AppController {
     @RequestMapping("/users")
     public String ViewUsersPage(Model model, @Param("keyword") String keyword) {
         List<User> listUsers = userService.listAll(keyword);
-        model.addAttribute("listUsers", listUsers);
+        model.addAttribute("listEntities", listUsers);
         model.addAttribute("keyword", keyword);
-        return "users";
+        model.addAttribute("entityType", "User");
+        model.addAttribute("baseLink", "/users");
+        model.addAttribute("editLink", "/users/editUser/");
+        model.addAttribute("deleteLink", "/users/deleteUser/");
+        return "entity_list";
     }
 
     @RequestMapping("/users/newUser")
@@ -114,9 +118,13 @@ public class AppController {
     @RequestMapping("/parkingSlots")
     public String ViewParkingSlotsPage(Model model, @Param("keyword") String keyword) {
         List<ParkingSlot> listParkingSlots = parkingSlotService.listAll(keyword);
-        model.addAttribute("listParkingSlots", listParkingSlots);
+        model.addAttribute("listEntities", listParkingSlots);
+        model.addAttribute("entityType", "ParkingSlot");
         model.addAttribute("keyword", keyword);
-        return "parking_slots";
+        model.addAttribute("baseLink", "/parkingSlots");
+        model.addAttribute("editLink", "/parkingSlots/editParkingSlot/");
+        model.addAttribute("deleteLink", "/parkingSlots/deleteParkingSlot/");
+        return "entity_list";
     }
 
     @RequestMapping("/parkingSlots/newParkingSlot")
@@ -200,8 +208,12 @@ public class AppController {
     @RequestMapping("/reservations")
     public String ViewReservationsPage(Model model) {
         List<Reservation> listReservations = reservationService.listAll();
-        model.addAttribute("listReservations", listReservations);
-        return "reservations";
+        model.addAttribute("listEntities", listReservations);
+        model.addAttribute("entityType", "Reservation");
+        model.addAttribute("baseLink", "/reservations");
+        model.addAttribute("editLink", "/reservations/editReservation/");
+        model.addAttribute("deleteLink", "/reservations/deleteReservation/");
+        return "entity_list";
     }
 
     @RequestMapping("/reservations/deleteReservation/{id}")

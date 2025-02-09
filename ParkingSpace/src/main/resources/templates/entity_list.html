@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Система бронирования мест на парковке</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container_main">
+    <div class="container3">
+        <h1 th:if="${entityType == 'User'}">Пользователи системы бронирования мест на парковке</h1>
+        <h1 th:if="${entityType == 'ParkingSlot'}">Парковочные слоты на парковке</h1>
+        <h1 th:if="${entityType == 'Reservation'}">Бронирования</h1>
+
+        <div class="search-container" th:if="${entityType == 'User' || entityType == 'ParkingSlot'}">
+            <h4 th:if="${entityType == 'User'}">Поиск пользователя по любому критерию:</h4>
+            <h4 th:if="${entityType == 'ParkingSlot'}">Поиск парковочного слота по любому критерию:</h4>
+
+            <form th:action="@{${baseLink}}" class="search-form">
+                <input type="text" name="keyword" id="keyword"  placeholder="Введите искомое значение" th:value="${keyword}" required/>
+                <input type="submit" class="green-btn" value="Поиск"/>
+                <input type="button" class="red-btn" value="Очистить" id="btnClear"
+                       onclick="clearSearch()"/>
+            </form>
+        </div>
+
+        <table id="1" class="custom-table">
+            <thead>
+            <tr>
+                <th th:if="${entityType == 'User'}">ID пользователя</th>
+                <th th:if="${entityType == 'User'}">Регистрационный номер автомобиля</th>
+                <th th:if="${entityType == 'User'}">Модель автомобиля</th>
+                <th th:if="${entityType == 'User'}">Цвет автомобиля</th>
+                <th th:if="${entityType == 'User'}">Имя</th>
+                <th th:if="${entityType == 'User'}">Фамилия</th>
+                <th th:if="${entityType == 'User'}">Номер телефона</th>
+
+                <th th:if="${entityType == 'ParkingSlot'}">ID слота</th>
+                <th th:if="${entityType == 'ParkingSlot'}">Код слота</th>
+                <th th:if="${entityType == 'ParkingSlot'}">Свободно</th>
+
+                <th th:if="${entityType == 'Reservation'}">ID бронирования</th>
+                <th th:if="${entityType == 'Reservation'}">Занятый слот</th>
+                <th th:if="${entityType == 'Reservation'}">Регистрационный номер автомобиля</th>
+                <th th:if="${entityType == 'Reservation'}">Номер телефона пользователя</th>
+                <th th:if="${entityType == 'Reservation'}">Время начала брони</th>
+                <th th:if="${entityType == 'Reservation'}">Время конца брони</th>
+                <th th:if="${entityType == 'Reservation'}">Статус бронирования</th>
+                <th th:if="${entityType == 'Reservation'}">Стоимость услуг</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="entity: ${listEntities}">
+
+                <th th:if="${entityType == 'User'}" th:text="${entity.id}">ID пользователя отстутсвует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleModel}">Модель автомобиля отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleColor}">Цвет прозрачный)))</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.firstName}">Имя пользователя отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.lastName}">Фамилия пользователя отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.phoneNumber}">Номер телефона отсутствует</th>
+
+                <th th:if="${entityType == 'ParkingSlot'}" th:text="${entity.id}">ID слота отстутсвует</th>
+                <th th:if="${entityType == 'ParkingSlot'}" th:text="${entity.slotCode}">Код слота отсутствует</th>
+                <th th:if="${entityType == 'ParkingSlot'}" th:text="${entity.isAvailable}">Информация о занятости слота отсутствует</th>
+
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.id}">ID бронирования отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.parkingSlot.slotCode}">Занятый слот отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.user.vehicleRegistrationNumber}">Регистрационный номер автомобиля отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.user.phoneNumber}">Номер телефона пользователя отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.startTime}">Время начала брони </th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.endTime}">Время конца брони отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.status}">Статус бронирования отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.price}">Стоимость услуг отстутсвует</th>
+
+                <td>
+                    <div class="small_buttons-container">
+                        <a th:href="@{${editLink}+${entity.id}}"><button type="button" class="green-btn">Редактировать</button></a>
+                        <a th:href="@{${deleteLink}+${entity.id}}"><button type="button" class="red-btn">Удалить</button></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>
+            <script type="text/javascript">
+                function getRowsColumn() {
+                    let table = document.getElementById('1')
+                    let tBody = table.querySelector('tbody')
+                    const count = tBody.querySelectorAll('tr').length;
+                    document.write('Количество записей в таблице: ' + count)
+                }
+
+                getRowsColumn()
+            </script>
+        </p>
+
+        <div class="buttons-container">
+            <a th:if="${entityType == 'User'}" href="/users/newUser"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
+            <a th:if="${entityType == 'ParkingSlot'}" href="/parkingSlots/newParkingSlot"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
+            <a th:if="${entityType == 'Reservations'}" href="/reservations/newReservation"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
+
+            <a href="/"><button class="button2" type="button" aria-pressed="false" autocomplete="off">В меню</button></a>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{${baseLink}}]]";
+    }
+</script>
+</body>
+</html>
