@@ -98,9 +98,9 @@
         </p>
 
         <div class="buttons-container">
-            <a th:if="${entityType == 'User'}" href="/users/newUser"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
-            <a th:if="${entityType == 'ParkingSlot'}" href="/parkingSlots/newParkingSlot"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
-            <a th:if="${entityType == 'Reservations'}" href="/reservations/newReservation"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
+            <a th:if="${entityType == 'User'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
+            <a th:if="${entityType == 'ParkingSlot'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
+            <a th:if="${entityType == 'Reservation'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
 
             <a href="/"><button class="button2" type="button" aria-pressed="false" autocomplete="off">В меню</button></a>
         </div>

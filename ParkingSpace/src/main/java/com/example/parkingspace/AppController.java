@@ -39,6 +39,7 @@ public class AppController {
         model.addAttribute("baseLink", "/users");
         model.addAttribute("editLink", "/users/editUser/");
         model.addAttribute("deleteLink", "/users/deleteUser/");
+        model.addAttribute("newLink", "/users/newUser");
         return "entity_list";
     }
 
@@ -124,6 +125,7 @@ public class AppController {
         model.addAttribute("baseLink", "/parkingSlots");
         model.addAttribute("editLink", "/parkingSlots/editParkingSlot/");
         model.addAttribute("deleteLink", "/parkingSlots/deleteParkingSlot/");
+        model.addAttribute("newLink", "/parkingSlots/newParkingSlot");
         return "entity_list";
     }
 
@@ -213,6 +215,7 @@ public class AppController {
         model.addAttribute("baseLink", "/reservations");
         model.addAttribute("editLink", "/reservations/editReservation/");
         model.addAttribute("deleteLink", "/reservations/deleteReservation/");
+        model.addAttribute("newLink", "/reservations/newReservation");
         return "entity_list";
     }
 
