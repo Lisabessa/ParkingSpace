@@ -47,34 +47,34 @@ public class AppController {
     public String ViewNewUserPage(Model model) {
         User user = new User();
         model.addAttribute("entity", user);
-        model.addAttribute("action", "/users/createUser");
+        model.addAttribute("action", "/api/users/");
         model.addAttribute("base_link", "/users");
         model.addAttribute("option", "create");
         return "change_entity";
     }
 
-    @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
-    public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-        if (bindingResult.hasErrors()) {
-            return "change_entity";
-        }
-
-        Optional<User> existingUser = userService.findDuplicates(user);
-        if (existingUser.isPresent()) {
-            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
-            return "change_entity";
-        }
-
-        try {
-            userService.save(user);
-            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
-        } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
-        }
-
-
-        return "redirect:/users";
-    }
+//    @RequestMapping(value = "/users/createUser", method = RequestMethod.POST)
+//    public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
+//        if (bindingResult.hasErrors()) {
+//            return "change_entity";
+//        }
+//
+//        Optional<User> existingUser = userService.findDuplicates(user);
+//        if (existingUser.isPresent()) {
+//            bindingResult.rejectValue("vehicleRegistrationNumber", "error.vehicleRegistrationNumber", "Такой регистрационный номер уже есть в системе.");
+//            return "change_entity";
+//        }
+//
+//        try {
+//            userService.save(user);
+//            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
+//        } catch (Exception e) {
+//            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
+//        }
+//
+//
+//        return "redirect:/users";
+//    }
 
     @RequestMapping("/users/editUser/{id}")
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {

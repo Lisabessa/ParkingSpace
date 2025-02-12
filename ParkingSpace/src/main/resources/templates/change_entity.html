@@ -9,6 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<th:block th:if="${entity instanceof T(com.example.parkingspace.User)}">
+    <script th:src="@{/js/user_creation.js}"></script>
+</th:block>
+
 <div class="container_main">
     <div class="container3">
         <h1 th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'create'}">Добавить нового пользователя</h1>
@@ -23,6 +28,9 @@
         <a th:href="@{${base_link}}"><button class="button2">Назад</button></a>
     </div>
 </div>
+
+
+
 
 </body>
 </html>

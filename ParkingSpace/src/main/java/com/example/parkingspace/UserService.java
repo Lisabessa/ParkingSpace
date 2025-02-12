@@ -26,6 +26,10 @@ public class UserService {
         return repo.findById(Long.valueOf(id)).get();
     }
 
+    public Optional<User> getUser(Long id){
+        return repo.findById(id);
+    }
+
     public void delete(String id){
         repo.deleteById(Long.valueOf(id));
     }
