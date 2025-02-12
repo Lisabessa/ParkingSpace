@@ -12,7 +12,7 @@
             <tr th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">
                 <td>ID пользователя:</td>
                 <td>
-                    <input type="text" th:field="*{id}"  readonly="readonly">
+                    <input type="text" th:field="*{id}"  readonly="readonly" id="idUser">
                     <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
                 </td>
             </tr>

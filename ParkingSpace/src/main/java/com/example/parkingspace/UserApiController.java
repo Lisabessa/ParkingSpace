@@ -61,4 +61,21 @@ public class UserApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Произошла ошибка при обновлении данных пользователя.");
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        Optional<User> user = userService.getUser(id);
+        if(user.isEmpty()) {
+            return ResponseEntity.ok("Пользователя с таким id не сущестсвует.");
+        }
+
+        try{
+            userService.delete(id);
+            return ResponseEntity.ok("Пользователь успешно удален.");
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Произошла ошибка при удалении пользователя.");
+        }
+
+    }
 }

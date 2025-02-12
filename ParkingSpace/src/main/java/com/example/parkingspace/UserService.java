@@ -30,8 +30,8 @@ public class UserService {
         return repo.findById(id);
     }
 
-    public void delete(String id){
-        repo.deleteById(Long.valueOf(id));
+    public void delete(Long id){
+        repo.deleteById(id);
     }
 
     public Optional<User> findDuplicates(User user){
