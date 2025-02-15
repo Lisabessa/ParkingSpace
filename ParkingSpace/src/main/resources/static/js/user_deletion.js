@@ -1,5 +1,5 @@
-function deleteUser(button) {
-    const id = button.getAttribute('idUser');
+function deleteEntity(button) {
+    const id = button.getAttribute('idEntity');
 
     if (confirm('Вы уверены, что хотите удалить этого пользователя?')) {
         fetch('/api/users/' + id, {

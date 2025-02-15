@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <form th:action="@{${action}}" th:object="${entity}" method="post" id="entityForm">
+    <form th:object="${entity}" method="post" id="entityForm">
         <table class="table_fields">
 
             <tr th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">
@@ -62,21 +62,21 @@
             <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">
                 <td>ID слота:</td>
                 <td>
-                    <input type="text" th:field="*{id}" readonly="readonly">
+                    <input type="text" th:field="*{id}" readonly="readonly" id="idParkingSlot">
                     <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">
                 <td>Код слота:</td>
                 <td>
-                  <input type="text" th:field="*{slotCode}">
+                  <input type="text" th:field="*{slotCode}" id="slotCode">
                   <span th:if="${#fields.hasErrors('slotCode')}" th:errors="*{slotCode}">Ошибка</span>
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot)}">
                 <td>Слот свободен:</td>
                 <td>
-                  <input type="text" th:field="*{isAvailable}">
+                  <input type="text" th:field="*{isAvailable}" id="isAvailable">
                 </td>
             </tr>
 

@@ -17,7 +17,7 @@
         <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">Отредактировать данные о парковочном слоте</h1>
         <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">Отредактировать данные о бронировании</h1>
 
-        <div th:replace="entity_form :: form(entity=${entity}, action=${action})"></div>
+        <div th:replace="entity_form :: form(entity=${entity})"></div>
         <a th:href="@{${base_link}}"><button class="button2">Назад</button></a>
     </div>
 </div>
@@ -28,6 +28,14 @@
 
 <th:block th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">
     <script th:src="@{/js/user_edition.js}"></script>
+</th:block>
+
+<th:block th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'create'}">
+    <script th:src="@{/js/parkingSlot_creation.js}"></script>
+</th:block>
+
+<th:block th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">
+    <script th:src="@{/js/parkingSlot_edition.js}"></script>
 </th:block>
 
 

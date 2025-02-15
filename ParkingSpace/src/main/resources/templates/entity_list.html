@@ -77,8 +77,7 @@
                 <td>
                     <div class="small_buttons-container">
                         <a th:href="@{${editLink}+${entity.id}}"><button type="button" class="green-btn">Редактировать</button></a>
-                        <a th:if="${entityType == 'User'}" th:idUser="${entity.id}" onclick="deleteUser(this)"><button type="button" class="red-btn">Удалить</button></a>
-                        <a th:if="${entityType == 'ParkingSlot' || entityType == 'Reservation'}" th:href="@{${deleteLink}+${entity.id}}"><button type="button" class="red-btn">Удалить</button></a>
+                        <a th:idEntity="${entity.id}" onclick="deleteEntity(this)"><button type="button" class="red-btn">Удалить</button></a>
                     </div>
                 </td>
             </tr>
@@ -117,6 +116,10 @@
 
 <th:block th:if="${entityType == 'User'}">
     <script th:src="@{/js/user_deletion.js}"></script>
+</th:block>
+
+<th:block th:if="${entityType == 'ParkingSlot'}">
+    <script th:src="@{/js/parkingSlot_deletion.js}"></script>
 </th:block>
 
 </body>

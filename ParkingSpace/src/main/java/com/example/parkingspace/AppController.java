@@ -38,7 +38,6 @@ public class AppController {
         model.addAttribute("entityType", "User");
         model.addAttribute("baseLink", "/users");
         model.addAttribute("editLink", "/users/editUser/");
-        model.addAttribute("deleteLink", "/users/deleteUser/");
         model.addAttribute("newLink", "/users/newUser");
         return "entity_list";
     }
@@ -47,7 +46,6 @@ public class AppController {
     public String ViewNewUserPage(Model model) {
         User user = new User();
         model.addAttribute("entity", user);
-        model.addAttribute("action", "/api/users/");
         model.addAttribute("base_link", "/users");
         model.addAttribute("option", "create");
         return "change_entity";
@@ -57,16 +55,11 @@ public class AppController {
     public ModelAndView editUser(@PathVariable(name = "id") Long id) {
         ModelAndView mav = new ModelAndView("change_entity");
         User user = userService.getUser(String.valueOf(id));
-//        if(user.isEmpty()) {
-//            return mav;
-//        }
         mav.addObject("entity", user);
-        mav.addObject("action", "/api/users/");
         mav.addObject("base_link", "/users");
         mav.addObject("option", "edit");
         return mav;
     }
-
 
     @RequestMapping("/parkingSlots")
     public String ViewParkingSlotsPage(Model model, @Param("keyword") String keyword) {
@@ -76,7 +69,6 @@ public class AppController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("baseLink", "/parkingSlots");
         model.addAttribute("editLink", "/parkingSlots/editParkingSlot/");
-        model.addAttribute("deleteLink", "/parkingSlots/deleteParkingSlot/");
         model.addAttribute("newLink", "/parkingSlots/newParkingSlot");
         return "entity_list";
     }
@@ -85,33 +77,9 @@ public class AppController {
     public String ViewNewParkingSlotPage(Model model) {
         ParkingSlot parkingSlot = new ParkingSlot();
         model.addAttribute("entity", parkingSlot);
-        model.addAttribute("action", "/parkingSlots/createParkingSlot");
         model.addAttribute("base_link", "/parkingSlots");
         model.addAttribute("option", "create");
         return "change_entity";
-    }
-
-    @RequestMapping(value = "/parkingSlots/createParkingSlot", method = RequestMethod.POST)
-    public String createParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-        if (bindingResult.hasErrors()) {
-            return "change_entity";
-        }
-
-        Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
-        if (existingParkingSlot.isPresent()) {
-            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "change_entity";
-        }
-
-        try {
-            parkingSlotService.save(parkingSlot);
-            redirectAttrs.addFlashAttribute("success", "Новый парковочный слот успешно создан.");
-        } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового парковочного слота.");
-        }
-
-
-        return "redirect:/parkingSlots";
     }
 
     @RequestMapping("/parkingSlots/editParkingSlot/{id}")
@@ -119,44 +87,9 @@ public class AppController {
         ModelAndView mav = new ModelAndView("change_entity");
         ParkingSlot parkingSlot = parkingSlotService.getParkingSlot(String.valueOf(id));
         mav.addObject("entity", parkingSlot);
-        mav.addObject("action", "/parkingSlots/saveEditedParkingSlot");
         mav.addObject("base_link", "/parkingSlots");
         mav.addObject("option", "edit");
         return mav;
-    }
-
-    @RequestMapping(value = "/parkingSlots/saveEditedParkingSlot", method = RequestMethod.POST)
-    public String saveEditedParkingSlot(@Valid @ModelAttribute ParkingSlot parkingSlot, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-        if (bindingResult.hasErrors()) {
-            return "change_entity";
-        }
-
-        Optional<ParkingSlot> existingParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
-        if (existingParkingSlot.isPresent() && !existingParkingSlot.get().getId().equals(parkingSlot.getId())) {
-            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-            return "change_entity";
-        }
-
-        try {
-            parkingSlotService.updateParkingSlot(parkingSlot);
-            redirectAttrs.addFlashAttribute("success", "Данные о парковочном слоте успешно обновлены.");
-        } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных о парковочном слоте.");
-        }
-
-        return "redirect:/parkingSlots";
-
-    }
-
-    @RequestMapping("/parkingSlots/deleteParkingSlot/{id}")
-    public String deleteParkingSlot(@PathVariable int id) {
-        parkingSlotService.delete(String.valueOf(id));
-        return "redirect:/parkingSlots";
-    }
-
-    @RequestMapping("/aboutAuthor")
-    public String aboutAuthor() {
-        return "about_author";
     }
 
     @RequestMapping("/reservations")
@@ -235,6 +168,11 @@ public class AppController {
 
         return "redirect:/reservations";
 
+    }
+
+    @RequestMapping("/aboutAuthor")
+    public String aboutAuthor() {
+        return "about_author";
     }
 
 }

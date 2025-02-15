@@ -26,7 +26,11 @@ public class ParkingSlotService {
         return repo.findById(Long.valueOf(id)).get();
     }
 
-    public void delete(String id){
+    public Optional<ParkingSlot> getParkingSlot(Long id){
+        return repo.findById(id);
+    }
+
+    public void delete(Long id){
         repo.deleteById(Long.valueOf(id));
     }
 
