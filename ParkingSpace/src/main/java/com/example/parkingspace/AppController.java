@@ -99,40 +99,17 @@ public class AppController {
         model.addAttribute("entityType", "Reservation");
         model.addAttribute("baseLink", "/reservations");
         model.addAttribute("editLink", "/reservations/editReservation/");
-        model.addAttribute("deleteLink", "/reservations/deleteReservation/");
         model.addAttribute("newLink", "/reservations/newReservation");
         return "entity_list";
-    }
-
-    @RequestMapping("/reservations/deleteReservation/{id}")
-    public String deleteReservation(@PathVariable int id) {
-        reservationService.delete(String.valueOf(id));
-        return "redirect:/reservations";
     }
 
     @RequestMapping("/reservations/newReservation")
     public String ViewNewReservationPage(Model model) {
         Reservation reservation = new Reservation();
         model.addAttribute("entity", reservation);
-        model.addAttribute("action", "/reservations/createReservation");
         model.addAttribute("base_link", "/reservations");
         model.addAttribute("option", "create");
         return "change_entity";
-    }
-
-    @RequestMapping(value = "/reservations/createReservation", method = RequestMethod.POST)
-    public String createReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-        if (bindingResult.hasErrors()) {
-            return "change_entity";
-        }
-        try {
-            reservationService.save(reservation);
-            redirectAttrs.addFlashAttribute("success", "Новый пользоаватель успешно создан.");
-        } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при создании нового пользователя.");
-        }
-
-        return "redirect:/reservations";
     }
 
     @RequestMapping("/reservations/editReservation/{id}")
@@ -141,33 +118,9 @@ public class AppController {
         Reservation reservation = reservationService.getReservation(String.valueOf(id));
 
         mav.addObject("entity", reservation);
-        mav.addObject("action", "/reservations/saveEditedReservation");
         mav.addObject("base_link", "/reservations");
         mav.addObject("option", "edit");
         return mav;
-    }
-
-    @RequestMapping(value = "/reservations/saveEditedReservation", method = RequestMethod.POST)
-    public String saveEditedReservation(@Valid @ModelAttribute Reservation reservation, BindingResult bindingResult, RedirectAttributes redirectAttrs) {
-//        if (bindingResult.hasErrors()) {
-//            return "new_entry";
-//        }
-
-//        Optional<Reservation> existingReservation = reservationService.findDuplicates(reservation);
-//        if (existingReservation.isPresent() && !existingReservation.get().getId().equals(reservation.getId())) {
-//            bindingResult.rejectValue("slotCode", "error.slotCode", "Такой слот уже есть в системе.");
-//            return "new_entry";
-//        }
-
-        try {
-            reservationService.updateReservation(reservation);
-            redirectAttrs.addFlashAttribute("success", "Данные о бронировании успешно обновлены.");
-        } catch (Exception e) {
-            redirectAttrs.addFlashAttribute("error", "Произошла ошибка при обновлении данных о бронировании.");
-        }
-
-        return "redirect:/reservations";
-
     }
 
     @RequestMapping("/aboutAuthor")

@@ -19,12 +19,16 @@ public class ReservationService {
         return repo.findById(Long.valueOf(id)).get();
     }
 
+    public Optional<Reservation> getReservation(Long id) {
+        return repo.findById(id);
+    }
+
     public void save(Reservation reservation) {
         repo.save(reservation);
     }
 
-    public void delete(String id) {
-        repo.deleteById(Long.valueOf(id));
+    public void delete(Long id) {
+        repo.deleteById(id);
     }
 
     public void updateReservation(Reservation reservation) throws Exception {

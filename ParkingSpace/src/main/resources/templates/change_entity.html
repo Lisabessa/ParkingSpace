@@ -38,6 +38,13 @@
     <script th:src="@{/js/parkingSlot_edition.js}"></script>
 </th:block>
 
+<th:block th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'create'}">
+    <script th:src="@{/js/reservation_creation.js}"></script>
+</th:block>
+
+<th:block th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">
+    <script th:src="@{/js/reservation_edition.js}"></script>
+</th:block>
 
 </body>
 </html>

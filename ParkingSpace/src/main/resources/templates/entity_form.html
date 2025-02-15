@@ -84,46 +84,46 @@
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">
                 <td>ID бронирования:</td>
                 <td>
-                    <input type="text" th:field="*{id}" readonly="readonly">
+                    <input type="text" th:field="*{id}" readonly="readonly" id="idReservation">
                     <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Ошибка</span>
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Время начала бронирования:</td>
                 <td>
-                    <input type="datetime-local" th:field="*{startTime}">
+                    <input type="datetime-local" th:field="*{startTime}" id="startTime">
                     <span th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">Ошибка</span>
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Время окончания бронирования:</td>
                 <td>
-                    <input type="datetime-local" th:value="*{endTime}" th:field="*{endTime}">
+                    <input type="datetime-local" th:value="*{endTime}" th:field="*{endTime}" id="endTime">
                     <span th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">Ошибка</span>
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>ID пользователя:</td>
                 <td>
-                    <input type="text" th:field="*{user.id}">
+                    <input type="text" th:field="*{user.id}" id="userId">
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>ID парковочного слота:</td>
                 <td>
-                    <input type="text" th:field="*{parkingSlot.id}">
+                    <input type="text" th:field="*{parkingSlot.id}" id="parkingSlotId">
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Статус:</td>
                 <td>
-                    <input type="text" th:field="*{status}">
+                    <input type="text" th:field="*{status}" id="status">
                 </td>
             </tr>
             <tr th:if="${entity instanceof T(com.example.parkingspace.Reservation)}">
                 <td>Стоимость парковки:</td>
                 <td>
-                    <input type="text" th:field="*{price}">
+                    <input type="text" th:field="*{price}" id="price">
                 </td>
             </tr>
 

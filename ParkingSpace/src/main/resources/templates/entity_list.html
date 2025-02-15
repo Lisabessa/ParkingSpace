@@ -122,5 +122,9 @@
     <script th:src="@{/js/parkingSlot_deletion.js}"></script>
 </th:block>
 
+<th:block th:if="${entityType == 'Reservation'}">
+    <script th:src="@{/js/reservation_deletion.js}"></script>
+</th:block>
+
 </body>
 </html>
