@@ -36,7 +36,7 @@ public class Reservation {
     private ParkingSlot parkingSlot;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     public User getUser(){
         return user;
