@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const reservationData = {
             startTime: startTime,
             endTime: endTime,
-            user_id: user_id,
-            parking_slot_id: parking_slot_id,
+            user: { id: user_id },
+            parkingSlot: { id: parking_slot_id },
             status: status,
             price: price
         };
