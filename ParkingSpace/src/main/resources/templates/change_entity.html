@@ -9,40 +9,40 @@
 
 <div class="container_main">
     <div class="container3">
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'create'}">Добавить нового пользователя</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'create'}">Добавить новый парковочный слот</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'create'}">Добавить новое бронирование</h1>
+        <h1 th:if="${entityType == 'User' && option == 'create'}">Добавить нового пользователя</h1>
+        <h1 th:if="${entityType == 'ParkingSlot' && option == 'create'}">Добавить новый парковочный слот</h1>
+        <h1 th:if="${entityType == 'Reservation' && option == 'create'}">Добавить новое бронирование</h1>
 
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">Отредактировать данные пользователя</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">Отредактировать данные о парковочном слоте</h1>
-        <h1 th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">Отредактировать данные о бронировании</h1>
+        <h1 th:if="${entityType == 'User' && option == 'edit'}">Отредактировать данные пользователя</h1>
+        <h1 th:if="${entityType == 'ParkingSlot' && option == 'edit'}">Отредактировать данные о парковочном слоте</h1>
+        <h1 th:if="${entityType == 'Reservation' && option == 'edit'}">Отредактировать данные о бронировании</h1>
 
         <div th:replace="entity_form :: form(entity=${entity})"></div>
         <a th:href="@{${base_link}}"><button class="button2">Назад</button></a>
     </div>
 </div>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'create'}">
+<th:block th:if="${entityType == 'User' && option == 'create'}">
     <script th:src="@{/js/user_creation.js}"></script>
 </th:block>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.User) && option == 'edit'}">
+<th:block th:if="${entityType == 'User' && option == 'edit'}">
     <script th:src="@{/js/user_edition.js}"></script>
 </th:block>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'create'}">
+<th:block th:if="${entityType == 'ParkingSlot' && option == 'create'}">
     <script th:src="@{/js/parkingSlot_creation.js}"></script>
 </th:block>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.ParkingSlot) && option == 'edit'}">
+<th:block th:if="${entityType == 'ParkingSlot' && option == 'edit'}">
     <script th:src="@{/js/parkingSlot_edition.js}"></script>
 </th:block>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'create'}">
+<th:block th:if="${entityType == 'Reservation' && option == 'create'}">
     <script th:src="@{/js/reservation_creation.js}"></script>
 </th:block>
 
-<th:block th:if="${entity instanceof T(com.example.parkingspace.Reservation) && option == 'edit'}">
+<th:block th:if="${entityType == 'Reservation' && option == 'edit'}">
     <script th:src="@{/js/reservation_edition.js}"></script>
 </th:block>
 

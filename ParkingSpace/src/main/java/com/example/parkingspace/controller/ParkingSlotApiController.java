@@ -1,5 +1,6 @@
-package com.example.parkingspace;
-
+package com.example.parkingspace.controller;
+import com.example.parkingspace.service.ParkingSlotService;
+import com.example.parkingspace.model.*;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

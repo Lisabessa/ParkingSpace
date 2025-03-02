@@ -1,17 +1,18 @@
-package com.example.parkingspace;
+package com.example.parkingspace.controller;
+import com.example.parkingspace.service.ParkingSlotService;
+import com.example.parkingspace.service.ReservationService;
+import com.example.parkingspace.service.UserService;
+import com.example.parkingspace.model.*;
 
 import java.util.List;
-import java.util.Optional;
 
-import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AppController {
@@ -46,6 +47,7 @@ public class AppController {
     public String ViewNewUserPage(Model model) {
         User user = new User();
         model.addAttribute("entity", user);
+        model.addAttribute("entityType", "User");
         model.addAttribute("base_link", "/users");
         model.addAttribute("option", "create");
         return "change_entity";
@@ -56,6 +58,7 @@ public class AppController {
         ModelAndView mav = new ModelAndView("change_entity");
         User user = userService.getUser(String.valueOf(id));
         mav.addObject("entity", user);
+        mav.addObject("entityType", "User");
         mav.addObject("base_link", "/users");
         mav.addObject("option", "edit");
         return mav;
@@ -77,6 +80,7 @@ public class AppController {
     public String ViewNewParkingSlotPage(Model model) {
         ParkingSlot parkingSlot = new ParkingSlot();
         model.addAttribute("entity", parkingSlot);
+        model.addAttribute("entityType", "ParkingSlot");
         model.addAttribute("base_link", "/parkingSlots");
         model.addAttribute("option", "create");
         return "change_entity";
@@ -87,6 +91,7 @@ public class AppController {
         ModelAndView mav = new ModelAndView("change_entity");
         ParkingSlot parkingSlot = parkingSlotService.getParkingSlot(String.valueOf(id));
         mav.addObject("entity", parkingSlot);
+        mav.addObject("entityType", "ParkingSlot");
         mav.addObject("base_link", "/parkingSlots");
         mav.addObject("option", "edit");
         return mav;
@@ -107,6 +112,7 @@ public class AppController {
     public String ViewNewReservationPage(Model model) {
         Reservation reservation = new Reservation();
         model.addAttribute("entity", reservation);
+        model.addAttribute("entityType", "Reservation");
         model.addAttribute("base_link", "/reservations");
         model.addAttribute("option", "create");
         return "change_entity";
@@ -118,6 +124,7 @@ public class AppController {
         Reservation reservation = reservationService.getReservation(String.valueOf(id));
 
         mav.addObject("entity", reservation);
+        mav.addObject("entityType", "Reservation");
         mav.addObject("base_link", "/reservations");
         mav.addObject("option", "edit");
         return mav;

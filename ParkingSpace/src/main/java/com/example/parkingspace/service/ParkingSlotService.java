@@ -1,5 +1,7 @@
-package com.example.parkingspace;
+package com.example.parkingspace.service;
+import com.example.parkingspace.model.*;
 
+import com.example.parkingspace.repository.ParkingSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

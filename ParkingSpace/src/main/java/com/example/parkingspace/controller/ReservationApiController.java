@@ -1,7 +1,8 @@
-package com.example.parkingspace;
+package com.example.parkingspace.controller;
+import com.example.parkingspace.service.ReservationService;
+import com.example.parkingspace.model.*;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
