@@ -47,4 +47,25 @@ public class ParkingSlotService {
         repo.save(existingParkingSlot);
     }
 
+    public Integer countAvailableSlots() {
+        Integer count = 0;
+        for (ParkingSlot parkingSlot : repo.findAll()) {
+            if (parkingSlot.getIsAvailable()) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public Integer countOccupiedSlots() {
+        Integer count = 0;
+        for (ParkingSlot parkingSlot : repo.findAll()) {
+            if (!parkingSlot.getIsAvailable()) {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }

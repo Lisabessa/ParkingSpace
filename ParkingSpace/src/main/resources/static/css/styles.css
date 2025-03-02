@@ -169,3 +169,10 @@ p {
     padding: 8px;
     text-align: left;
 }
+
+.diagrams {
+    width: 400px;
+    height: 400px;
+    margin: 20px auto; /* Добавляет отступы */
+}
+
