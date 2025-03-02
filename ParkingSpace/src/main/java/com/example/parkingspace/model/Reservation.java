@@ -36,12 +36,14 @@ public class Reservation {
     private ParkingSlot parkingSlot;
 
 
+    //@ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     public User getUser(){
         return user;
     }
 
+//    @ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
     @JoinColumn(name = "parking_slot_id")
     public ParkingSlot getParkingSlot(){

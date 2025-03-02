@@ -31,7 +31,7 @@ public class ReservationApiController {
     @PostMapping
     public ResponseEntity<?> createReservation(@Valid @RequestBody Reservation reservation) {
         try{
-            reservationService.save(reservation);
+            reservationService.createReservation(reservation);
             return new ResponseEntity<>("Новое бронирование успешно создано.", HttpStatus.CREATED);
         }
         catch (Exception e) {
@@ -47,7 +47,7 @@ public class ReservationApiController {
         }
         reservation.setId(id);
         try{
-            reservationService.save(reservation);
+            reservationService.updateReservation(reservation);
             return ResponseEntity.ok("Данные о бронировании успешно изменены.");
         }
         catch (Exception e) {
