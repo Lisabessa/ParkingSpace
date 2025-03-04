@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 public class Reservation {
-
     private Long id;
 
     @Id
@@ -31,19 +30,15 @@ public class Reservation {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endTime;
 
-    private User user;
-
+    private Vehicle vehicle;
     private ParkingSlot parkingSlot;
 
-
-    //@ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    public User getUser(){
-        return user;
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    public Vehicle getVehicle(){
+        return vehicle;
     }
 
-//    @ManyToOne(cascade = CascadeType.PERSIST)
     @ManyToOne
     @JoinColumn(name = "parking_slot_id")
     public ParkingSlot getParkingSlot(){
@@ -54,6 +49,5 @@ public class Reservation {
     public String status;
     @Getter
     private Double price;
-
 
 }

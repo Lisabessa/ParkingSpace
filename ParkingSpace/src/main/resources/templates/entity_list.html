@@ -8,13 +8,16 @@
 <body>
 <div class="container_main">
     <div class="container3">
+        <h1 th:if="${entityType == 'Roles'}">Роли</h1>
         <h1 th:if="${entityType == 'User'}">Пользователи системы бронирования мест на парковке</h1>
+        <h1 th:if="${entityType == 'Vehicle'}">Транспортные средства</h1>
         <h1 th:if="${entityType == 'ParkingSlot'}">Парковочные слоты на парковке</h1>
         <h1 th:if="${entityType == 'Reservation'}">Бронирования</h1>
 
-        <div class="search-container" th:if="${entityType == 'User' || entityType == 'ParkingSlot'}">
+        <div class="search-container" th:if="${entityType == 'User' || entityType == 'ParkingSlot' || entityType == 'Vehicle'}">
             <h4 th:if="${entityType == 'User'}">Поиск пользователя по любому критерию:</h4>
             <h4 th:if="${entityType == 'ParkingSlot'}">Поиск парковочного слота по любому критерию:</h4>
+            <h4 th:if="${entityType == 'Vehicle'}">Поиск ТС по любому критерию:</h4>
 
             <form th:action="@{${baseLink}}" class="search-form">
                 <input type="text" name="keyword" id="keyword"  placeholder="Введите искомое значение" th:value="${keyword}" required/>
@@ -27,13 +30,26 @@
         <table id="1" class="custom-table">
             <thead>
             <tr>
+                <th th:if="${entityType == 'Role'}">ID роли</th>
+                <th th:if="${entityType == 'Role'}">Роль</th>
+                <th th:if="${entityType == 'Role'}">Код роли</th>
+
                 <th th:if="${entityType == 'User'}">ID пользователя</th>
-                <th th:if="${entityType == 'User'}">Регистрационный номер автомобиля</th>
-                <th th:if="${entityType == 'User'}">Модель автомобиля</th>
-                <th th:if="${entityType == 'User'}">Цвет автомобиля</th>
                 <th th:if="${entityType == 'User'}">Имя</th>
                 <th th:if="${entityType == 'User'}">Фамилия</th>
                 <th th:if="${entityType == 'User'}">Номер телефона</th>
+                <th th:if="${entityType == 'User'}">Роль</th>
+                <th th:if="${entityType == 'User'}">Логин</th>
+                <th th:if="${entityType == 'User'}">Пароль</th>
+
+                <th th:if="${entityType == 'Vehicle'}">ID ТС</th>
+                <th th:if="${entityType == 'Vehicle'}">Регистрационный номер автомобиля</th>
+                <th th:if="${entityType == 'Vehicle'}">Модель автомобиля</th>
+                <th th:if="${entityType == 'Vehicle'}">Цвет автомобиля</th>
+                <th th:if="${entityType == 'Vehicle'}">Имя владельца</th>
+                <th th:if="${entityType == 'Vehicle'}">Фамилия владельца</th>
+                <th th:if="${entityType == 'Vehicle'}">Номер телефона</th>
+                <th th:if="${entityType == 'Vehicle'}">Логин владельца</th>
 
                 <th th:if="${entityType == 'ParkingSlot'}">ID слота</th>
                 <th th:if="${entityType == 'ParkingSlot'}">Код слота</th>
@@ -53,13 +69,26 @@
             <tbody>
             <tr th:each="entity: ${listEntities}">
 
+                <th th:if="${entityType == 'Role'}" th:text="${entity.id}">ID роли отстутсвует</th>
+                <th th:if="${entityType == 'Role'}" th:text="${entity.role}">Роль отутствует</th>
+                <th th:if="${entityType == 'Role'}" th:text="${entity.code}">Код роли отсутствует</th>
+
                 <th th:if="${entityType == 'User'}" th:text="${entity.id}">ID пользователя отстутсвует</th>
-                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
-                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleModel}">Модель автомобиля отсутствует</th>
-                <th th:if="${entityType == 'User'}" th:text="${entity.vehicleColor}">Цвет прозрачный)))</th>
                 <th th:if="${entityType == 'User'}" th:text="${entity.firstName}">Имя пользователя отсутствует</th>
                 <th th:if="${entityType == 'User'}" th:text="${entity.lastName}">Фамилия пользователя отсутствует</th>
                 <th th:if="${entityType == 'User'}" th:text="${entity.phoneNumber}">Номер телефона отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.role.role}">Роль пользователя отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.login}">Логин пользователя отсутствует</th>
+                <th th:if="${entityType == 'User'}" th:text="${entity.password}">Пароль отсутствует</th>
+
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.id}">ID ТС отстутсвует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.vehicleModel}">Модель автомобиля отсутствует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.vehicleColor}">Цвет прозрачный)))</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.user.firstName}">Имя владельца отсутствует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.user.lastName}">Фамилия владельца отсутствует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.user.phoneNumber}">Номер телефона владельца отсутствует</th>
+                <th th:if="${entityType == 'Vehicle'}" th:text="${entity.user.login}">Логин владельца отсутствует</th>
 
                 <th th:if="${entityType == 'ParkingSlot'}" th:text="${entity.id}">ID слота отстутсвует</th>
                 <th th:if="${entityType == 'ParkingSlot'}" th:text="${entity.slotCode}">Код слота отсутствует</th>
@@ -67,8 +96,8 @@
 
                 <th th:if="${entityType == 'Reservation'}" th:text="${entity.id}">ID бронирования отстутсвует</th>
                 <th th:if="${entityType == 'Reservation'}" th:text="${entity.parkingSlot.slotCode}">Занятый слот отстутсвует</th>
-                <th th:if="${entityType == 'Reservation'}" th:text="${entity.user.vehicleRegistrationNumber}">Регистрационный номер автомобиля отстутсвует</th>
-                <th th:if="${entityType == 'Reservation'}" th:text="${entity.user.phoneNumber}">Номер телефона пользователя отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.vehicle.vehicleRegistrationNumber}">Регистрационный номер автомобиля отстутсвует</th>
+                <th th:if="${entityType == 'Reservation'}" th:text="${entity.vehicle.user.phoneNumber}">Номер телефона пользователя отстутсвует</th>
                 <th th:if="${entityType == 'Reservation'}" th:text="${entity.startTime}">Время начала брони </th>
                 <th th:if="${entityType == 'Reservation'}" th:text="${entity.endTime}">Время конца брони отстутсвует</th>
                 <th th:if="${entityType == 'Reservation'}" th:text="${entity.status}">Статус бронирования отстутсвует</th>
@@ -98,7 +127,9 @@
         </p>
 
         <div class="buttons-container">
+            <a th:if="${entityType == 'Role'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новую роль</button></a>
             <a th:if="${entityType == 'User'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
+            <a th:if="${entityType == 'Vehicle'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое транспортное средство</button></a>
             <a th:if="${entityType == 'ParkingSlot'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
             <a th:if="${entityType == 'Reservation'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
 
@@ -114,8 +145,16 @@
     }
 </script>
 
+<th:block th:if="${entityType == 'Role'}">
+    <script th:src="@{/js/role_deletion.js}"></script>
+</th:block>
+
 <th:block th:if="${entityType == 'User'}">
     <script th:src="@{/js/user_deletion.js}"></script>
+</th:block>
+
+<th:block th:if="${entityType == 'Vehicle'}">
+    <script th:src="@{/js/vehicle_deletion.js}"></script>
 </th:block>
 
 <th:block th:if="${entityType == 'ParkingSlot'}">

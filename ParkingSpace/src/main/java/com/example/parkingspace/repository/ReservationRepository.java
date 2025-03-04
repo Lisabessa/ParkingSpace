@@ -12,7 +12,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByEndTime(LocalDateTime endTime);
     List<Reservation> findByPrice(Double price);
 
-    List<Reservation> findByUser(User user);
+    List<Reservation> findByVehicle(Vehicle vehicle);
     List<Reservation> findByParkingSlot(ParkingSlot parkingSlot);
 
 }

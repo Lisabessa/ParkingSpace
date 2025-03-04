@@ -9,11 +9,15 @@
 
 <div class="container_main">
     <div class="container3">
+        <h1 th:if="${entityType == 'Role' && option == 'create'}">Добавить новую роль</h1>
         <h1 th:if="${entityType == 'User' && option == 'create'}">Добавить нового пользователя</h1>
+        <h1 th:if="${entityType == 'Vehicle' && option == 'create'}">Добавить новое ТС</h1>
         <h1 th:if="${entityType == 'ParkingSlot' && option == 'create'}">Добавить новый парковочный слот</h1>
         <h1 th:if="${entityType == 'Reservation' && option == 'create'}">Добавить новое бронирование</h1>
 
+        <h1 th:if="${entityType == 'Role' && option == 'edit'}">Отредактировать роль</h1>
         <h1 th:if="${entityType == 'User' && option == 'edit'}">Отредактировать данные пользователя</h1>
+        <h1 th:if="${entityType == 'Vehicle' && option == 'edit'}">Отредактировать данные о ТС</h1>
         <h1 th:if="${entityType == 'ParkingSlot' && option == 'edit'}">Отредактировать данные о парковочном слоте</h1>
         <h1 th:if="${entityType == 'Reservation' && option == 'edit'}">Отредактировать данные о бронировании</h1>
 
@@ -22,12 +26,28 @@
     </div>
 </div>
 
+<th:block th:if="${entityType == 'Role' && option == 'create'}">
+    <script th:src="@{/js/role_creation.js}"></script>
+</th:block>
+
+<th:block th:if="${entityType == 'Role' && option == 'edit'}">
+    <script th:src="@{/js/role_edition.js}"></script>
+</th:block>
+
 <th:block th:if="${entityType == 'User' && option == 'create'}">
     <script th:src="@{/js/user_creation.js}"></script>
 </th:block>
 
 <th:block th:if="${entityType == 'User' && option == 'edit'}">
     <script th:src="@{/js/user_edition.js}"></script>
+</th:block>
+
+<th:block th:if="${entityType == 'Vehicle' && option == 'create'}">
+    <script th:src="@{/js/vehicle_creation.js}"></script>
+</th:block>
+
+<th:block th:if="${entityType == 'Vehicle' && option == 'edit'}">
+    <script th:src="@{/js/vehicle_edition.js}"></script>
 </th:block>
 
 <th:block th:if="${entityType == 'ParkingSlot' && option == 'create'}">

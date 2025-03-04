@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const startTime = document.getElementById('startTime').value;
         const endTime = document.getElementById('endTime').value;
-        const user_id = document.getElementById('userId').value;
+        const vehicle_id = document.getElementById('vehicleId').value;
         const parking_slot_id = document.getElementById('parkingSlotId').value;
         const status = document.getElementById('status').value;
         const price = document.getElementById('price').value;
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const reservationData = {
             startTime: startTime,
             endTime: endTime,
-            user: { id: user_id },
+            vehicle: { id: vehicle_id },
             parkingSlot: { id: parking_slot_id },
             status: status,
             price: price

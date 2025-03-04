@@ -37,17 +37,17 @@ public class UserService {
     }
 
     public Optional<User> findDuplicates(User user){
-         return repo.findByVehicleRegistrationNumber(user.getVehicleRegistrationNumber());
+         return repo.findByLogin(user.getLogin());
     }
 
     public void updateUser(User user) throws Exception {
         User existingUser = repo.findById(user.getId()).orElseThrow(() -> new RuntimeException("Пользователь не найден."));
-        existingUser.setVehicleRegistrationNumber(user.getVehicleRegistrationNumber());
-        existingUser.setVehicleModel(user.getVehicleModel());
-        existingUser.setVehicleColor(user.getVehicleColor());
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setPhoneNumber(user.getPhoneNumber());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setLogin(user.getLogin());
+        existingUser.setRole(user.getRole());
         repo.save(existingUser);
     }
 }

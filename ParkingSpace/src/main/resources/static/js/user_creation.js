@@ -3,21 +3,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-
-        const vehicleRegistrationNumber = document.getElementById('vehicleRegistrationNumber').value;
-        const vehicleModel = document.getElementById('vehicleModel').value;
-        const vehicleColor = document.getElementById('vehicleColor').value;
         const firstName = document.getElementById('firstName').value;
         const lastName = document.getElementById('lastName').value;
         const phoneNumber = document.getElementById('phoneNumber').value;
+        const role_id = document.getElementById('roleId').value;
+        const login = document.getElementById('login').value;
+        const password = document.getElementById('password').value;
 
         const userData = {
-            vehicleRegistrationNumber: vehicleRegistrationNumber,
-            vehicleModel: vehicleModel,
-            vehicleColor: vehicleColor,
             firstName: firstName,
             lastName: lastName,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            role: { id: role_id },
+            login: login,
+            password: password
         };
 
         fetch('/api/users', {

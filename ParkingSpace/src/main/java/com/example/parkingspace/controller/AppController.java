@@ -1,7 +1,5 @@
 package com.example.parkingspace.controller;
-import com.example.parkingspace.service.ParkingSlotService;
-import com.example.parkingspace.service.ReservationService;
-import com.example.parkingspace.service.UserService;
+import com.example.parkingspace.service.*;
 import com.example.parkingspace.model.*;
 
 import java.util.List;
@@ -24,6 +22,12 @@ public class AppController {
 
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private VehicleService vehicleService;
+
+    @Autowired
+    private RoleService roleService;
 
 
     @RequestMapping("/")
@@ -126,6 +130,71 @@ public class AppController {
         mav.addObject("entity", reservation);
         mav.addObject("entityType", "Reservation");
         mav.addObject("base_link", "/reservations");
+        mav.addObject("option", "edit");
+        return mav;
+    }
+
+    @RequestMapping("/vehicles")
+    public String ViewVehiclesPage(Model model, @Param("keyword") String keyword) {
+        List<Vehicle> listVehicles = vehicleService.listAll(keyword);
+        model.addAttribute("listEntities", listVehicles);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("entityType", "Vehicle");
+        model.addAttribute("baseLink", "/vehicles");
+        model.addAttribute("editLink", "/vehicles/editVehicle/");
+        model.addAttribute("newLink", "/vehicles/newVehicle");
+        return "entity_list";
+    }
+
+    @RequestMapping("/vehicles/newVehicle")
+    public String ViewNewVehiclePage(Model model) {
+        Vehicle vehicle = new Vehicle();
+        model.addAttribute("entity", vehicle);
+        model.addAttribute("entityType", "Vehicle");
+        model.addAttribute("base_link", "/vehicles");
+        model.addAttribute("option", "create");
+        return "change_entity";
+    }
+
+    @RequestMapping("/vehicles/editVehicle/{id}")
+    public ModelAndView editVehicle(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("change_entity");
+        Vehicle vehicle = vehicleService.getVehicle(String.valueOf(id));
+        mav.addObject("entity", vehicle);
+        mav.addObject("entityType", "Vehicle");
+        mav.addObject("base_link", "/vehicles");
+        mav.addObject("option", "edit");
+        return mav;
+    }
+
+    @RequestMapping("/roles")
+    public String ViewRolesPage(Model model) {
+        List<Role> listRoles = roleService.listAll();
+        model.addAttribute("listEntities", listRoles);
+        model.addAttribute("entityType", "Role");
+        model.addAttribute("baseLink", "/roles");
+        model.addAttribute("editLink", "/roles/editRole/");
+        model.addAttribute("newLink", "/roles/newRole");
+        return "entity_list";
+    }
+
+    @RequestMapping("/roles/newRole")
+    public String ViewNewRolePage(Model model) {
+        Role role = new Role();
+        model.addAttribute("entity", role);
+        model.addAttribute("entityType", "Role");
+        model.addAttribute("base_link", "/roles");
+        model.addAttribute("option", "create");
+        return "change_entity";
+    }
+
+    @RequestMapping("/roles/editRole/{id}")
+    public ModelAndView editRole(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("change_entity");
+        Role role = roleService.getRole(String.valueOf(id));
+        mav.addObject("entity", role);
+        mav.addObject("entityType", "Role");
+        mav.addObject("base_link", "/roles");
         mav.addObject("option", "edit");
         return mav;
     }

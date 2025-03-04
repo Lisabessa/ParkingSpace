@@ -11,15 +11,11 @@ import jakarta.validation.constraints.NotBlank;
 public class User {
     private Long id;
 
-    @NotBlank(message = "Регистрационный номер автомобиля не должен быть пустым")
-    @Getter
-    private String vehicleRegistrationNumber;
-
-    @Getter
-    private String vehicleModel;
-
-    @Getter
-    private String vehicleColor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
+    }
 
     @NotBlank(message = "Имя не должно быть пустым")
     @Getter
@@ -33,9 +29,18 @@ public class User {
     @Getter
     private String phoneNumber;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    public Role getRole() {
+        return role;
     }
+
+    @NotBlank(message = "Логин не должен быть пустым")
+    @Getter
+    private String login;
+
+    @Getter
+    private String password;
 }
