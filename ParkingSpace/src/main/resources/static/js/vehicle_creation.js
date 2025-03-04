@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function (){
             user: { id: user_id }
         };
 
-        fetch('api/vehicles', {
+        fetch('/api/vehicles', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
