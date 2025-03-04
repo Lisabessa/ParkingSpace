@@ -18,24 +18,24 @@ public class ParkingSlotApiController {
     private ParkingSlotService parkingSlotService;
 
     @GetMapping
-    public List<ParkingSlot> getParkingSlots(@RequestParam(required = false) String keyword) {
+    public List<ParkingSlot> getParkingSlotsMethod(@RequestParam(required = false) String keyword) {
         return parkingSlotService.listAll(keyword);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ParkingSlot> getParkingSlotById(@PathVariable Long id) {
+    public ResponseEntity<ParkingSlot> getParkingSlotByIdMethod(@PathVariable Long id) {
         Optional<ParkingSlot> parkingSlot = parkingSlotService.getParkingSlot(id);
         return parkingSlot.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createParkingSlot(@Valid @RequestBody ParkingSlot parkingSlot) {
+    public ResponseEntity<?> createParkingSlotMethod(@Valid @RequestBody ParkingSlot parkingSlot) {
         Optional<ParkingSlot> duplicatedParkingSlot = parkingSlotService.findDuplicates(parkingSlot);
         if(duplicatedParkingSlot.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Парковочный слот с таким кодом уже существует");
         }
         try{
-            parkingSlotService.save(parkingSlot);
+            parkingSlotService.createParkingSlot(parkingSlot);
             return new ResponseEntity<>("Парковочный слот успешно создан", HttpStatus.CREATED);
         }
         catch (Exception e){
@@ -44,7 +44,7 @@ public class ParkingSlotApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateParkingSlot(@PathVariable Long id, @Valid @RequestBody ParkingSlot parkingSlot) {
+    public ResponseEntity<?> updateParkingSlotMethod(@PathVariable Long id, @Valid @RequestBody ParkingSlot parkingSlot) {
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.getParkingSlot(id);
         if(existingParkingSlot.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -56,7 +56,7 @@ public class ParkingSlotApiController {
         }
 
         try{
-            parkingSlotService.save(parkingSlot);
+            parkingSlotService.updateParkingSlot(parkingSlot);
             return ResponseEntity.ok("Данные парковочного слота успешно обновлены.");
         }
         catch (Exception e){
@@ -66,7 +66,7 @@ public class ParkingSlotApiController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteParkingSlot(@PathVariable Long id) {
+    public ResponseEntity<?> deleteParkingSlotMethod(@PathVariable Long id) {
         Optional<ParkingSlot> existingParkingSlot = parkingSlotService.getParkingSlot(id);
         if(existingParkingSlot.isEmpty()) {
             return ResponseEntity.notFound().build();

@@ -18,18 +18,18 @@ public class ReservationApiController {
     private ReservationService reservationService;
 
     @GetMapping
-    public List<Reservation> getAllReservations() {
+    public List<Reservation> getAllReservationsMethod() {
         return reservationService.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservation(@PathVariable Long id) {
+    public ResponseEntity<Reservation> getReservationMethod(@PathVariable Long id) {
         Optional<Reservation> reservation = reservationService.getReservation(id);
         return reservation.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createReservation(@Valid @RequestBody Reservation reservation) {
+    public ResponseEntity<?> createReservationMethod(@Valid @RequestBody Reservation reservation) {
         try{
             reservationService.createReservation(reservation);
             return new ResponseEntity<>("Новое бронирование успешно создано.", HttpStatus.CREATED);
@@ -40,7 +40,7 @@ public class ReservationApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateReservation(@PathVariable Long id, @Valid @RequestBody Reservation reservation) {
+    public ResponseEntity<?> updateReservationMethod(@PathVariable Long id, @Valid @RequestBody Reservation reservation) {
         Optional<Reservation> existingReservation = reservationService.getReservation(id);
         if (existingReservation.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -56,7 +56,7 @@ public class ReservationApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteReservation(@PathVariable Long id) {
+    public ResponseEntity<?> deleteReservationMethod(@PathVariable Long id) {
         Optional<Reservation> reservation = reservationService.getReservation(id);
         if (reservation.isEmpty()) {
             return ResponseEntity.notFound().build();

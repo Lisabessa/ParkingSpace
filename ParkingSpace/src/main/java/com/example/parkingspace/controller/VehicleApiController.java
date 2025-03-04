@@ -19,18 +19,18 @@ public class VehicleApiController {
     private VehicleService vehicleService;
 
     @GetMapping
-    public List<Vehicle> getVehicles(@RequestParam(required = false) String keyword) {
+    public List<Vehicle> getVehiclesMethod(@RequestParam(required = false) String keyword) {
         return vehicleService.listAll(keyword);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
+    public ResponseEntity<Vehicle> getVehicleByIdMethod(@PathVariable Long id) {
         Optional<Vehicle> vehicle = vehicleService.getVehicle(id);
         return vehicle.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createVehicle(@Valid @RequestBody Vehicle vehicle) {
+    public ResponseEntity<?> createVehicleMethod(@Valid @RequestBody Vehicle vehicle) {
         Optional<Vehicle> duplicatedVehicle = vehicleService.findDuplicates(vehicle);
         if (duplicatedVehicle.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("ТС с таким регистрационным номером уже существует.");
@@ -45,7 +45,7 @@ public class VehicleApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateVehicle(@PathVariable Long id, @Valid @RequestBody Vehicle vehicle) {
+    public ResponseEntity<?> updateVehicleMethod(@PathVariable Long id, @Valid @RequestBody Vehicle vehicle) {
         Optional<Vehicle> existingVehicle = vehicleService.getVehicle(id);
         if(existingVehicle.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -66,7 +66,7 @@ public class VehicleApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteVehicle(@PathVariable Long id) {
+    public ResponseEntity<?> deleteVehicleMethod(@PathVariable Long id) {
         Optional<Vehicle> vehicle = vehicleService.getVehicle(id);
         if(vehicle.isEmpty()) {
             return ResponseEntity.ok("ТС с таким id не сущестсвует.");

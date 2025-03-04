@@ -20,7 +20,7 @@ public class ParkingSlotService {
         return repo.SearchParkingSlot(keyword);
     };
 
-    public void save(ParkingSlot parkingSlot){
+    public void createParkingSlot(ParkingSlot parkingSlot){
         repo.save(parkingSlot);
     }
 
@@ -41,10 +41,7 @@ public class ParkingSlotService {
     }
 
     public void updateParkingSlot(ParkingSlot parkingSlot) throws Exception{
-        ParkingSlot existingParkingSlot = repo.findById(parkingSlot.getId()).orElseThrow(() -> new RuntimeException("Парковочное место не найдено"));
-        existingParkingSlot.setSlotCode(parkingSlot.getSlotCode());
-        existingParkingSlot.setIsAvailable(parkingSlot.getIsAvailable());
-        repo.save(existingParkingSlot);
+        repo.save(parkingSlot);
     }
 
     public Integer countAvailableSlots() {

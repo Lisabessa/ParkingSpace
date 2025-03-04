@@ -18,24 +18,24 @@ public class UserApiController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getUsers(@RequestParam(required = false) String keyword) {
+    public List<User> getUsersMethod(@RequestParam(required = false) String keyword) {
         return userService.listAll(keyword);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<User> getUserByIdMethod(@PathVariable Long id) {
         Optional<User> user = userService.getUser(id);
         return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<?> createUserMethod(@Valid @RequestBody User user) {
         Optional<User> duplicatedUser = userService.findDuplicates(user);
         if (duplicatedUser.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Пользователь с таким регистрационным номером уже существует");
         }
         try{
-            userService.save(user);
+            userService.createUser(user);
             return new ResponseEntity<>("Пользователь успешно создан", HttpStatus.CREATED);
         }
         catch (Exception e) {
@@ -44,7 +44,7 @@ public class UserApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
+    public ResponseEntity<?> updateUserMethod(@PathVariable Long id, @Valid @RequestBody User user) {
         Optional<User> existingUser = userService.getUser(id);
         if(existingUser.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -56,7 +56,7 @@ public class UserApiController {
         }
 
         try{
-            userService.save(user);
+            userService.updateUser(user);
             return ResponseEntity.ok("Данные пользователя успешно обновлены.");
         }
         catch (Exception e) {
@@ -65,7 +65,7 @@ public class UserApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<?> deleteUserMethod(@PathVariable Long id) {
         Optional<User> user = userService.getUser(id);
         if(user.isEmpty()) {
             return ResponseEntity.ok("Пользователя с таким id не сущестсвует.");

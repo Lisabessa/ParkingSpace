@@ -22,8 +22,8 @@ public class UserService {
         return repo.SearchUser(keyword);
     }
 
-    public void save(User user){
-        //user.setPassword(passwordEncoder().encode(user.getPassword()));
+    public void createUser(User user){
+        user.setPassword(passwordEncoder().encode(user.getPassword()));
         repo.save(user);
     }
 
@@ -44,14 +44,11 @@ public class UserService {
     }
 
     public void updateUser(User user) throws Exception {
-        User existingUser = repo.findById(user.getId()).orElseThrow(() -> new RuntimeException("Пользователь не найден."));
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setPhoneNumber(user.getPhoneNumber());
-        existingUser.setPassword(user.getPassword());
-        existingUser.setLogin(user.getLogin());
-        existingUser.setRole(user.getRole());
-        repo.save(existingUser);
+        User existingUser = repo.findById(Long.valueOf(user.getId())).get();
+        if(!existingUser.getPassword().equals(passwordEncoder().encode(user.getPassword()))){
+            user.setPassword(passwordEncoder().encode(user.getPassword()));
+        }
+        repo.save(user);
     }
 
     public PasswordEncoder passwordEncoder() {

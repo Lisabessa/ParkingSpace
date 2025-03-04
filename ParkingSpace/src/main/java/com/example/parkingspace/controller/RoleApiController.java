@@ -18,18 +18,18 @@ public class RoleApiController {
     private RoleService roleService;
 
     @GetMapping
-    public List<Role> getRoles() {
+    public List<Role> getRolesMethod() {
         return roleService.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Role> getRoleById(@PathVariable Long id) {
+    public ResponseEntity<Role> getRoleByIdMethod(@PathVariable Long id) {
         Optional<Role> role = roleService.getRole(id);
         return role.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<?> createRole(@Valid @RequestBody Role role) {
+    public ResponseEntity<?> createRoleMethod(@Valid @RequestBody Role role) {
         Optional<Role> duplicatedRole = roleService.findDuplicates(role);
         if (duplicatedRole.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Роль с таким названием уже существует.");
@@ -44,7 +44,7 @@ public class RoleApiController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRole(@PathVariable Long id, @Valid @RequestBody Role role) {
+    public ResponseEntity<?> updateRoleMethod(@PathVariable Long id, @Valid @RequestBody Role role) {
         Optional<Role> existingRole = roleService.getRole(id);
         if(existingRole.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -65,7 +65,7 @@ public class RoleApiController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRole(@PathVariable Long id) {
+    public ResponseEntity<?> deleteRoleMethod(@PathVariable Long id) {
         Optional<Role> role = roleService.getRole(id);
         if(role.isEmpty()) {
             return ResponseEntity.ok("Роли с таким id не сущестсвует.");

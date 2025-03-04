@@ -17,7 +17,7 @@ public class StatsApiController {
     private ParkingSlotService parkingSlotService;
 
     @GetMapping("/parkingSlots")
-    public Map<String, Integer> getSlotsStats() {
+    public Map<String, Integer> getSlotsStatsMethod() {
         Integer available = parkingSlotService.countAvailableSlots();
         Integer occupied = parkingSlotService.countOccupiedSlots();
         Map<String, Integer> stats = new HashMap<>();
