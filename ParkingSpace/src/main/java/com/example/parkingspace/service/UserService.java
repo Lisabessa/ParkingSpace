@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import com.example.parkingspace.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +23,7 @@ public class UserService {
     }
 
     public void save(User user){
+        //user.setPassword(passwordEncoder().encode(user.getPassword()));
         repo.save(user);
     }
 
@@ -49,5 +52,9 @@ public class UserService {
         existingUser.setLogin(user.getLogin());
         existingUser.setRole(user.getRole());
         repo.save(existingUser);
+    }
+
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

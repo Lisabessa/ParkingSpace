@@ -6,17 +6,17 @@ VALUES
 
 INSERT INTO users (first_name, last_name, phone_number, role_id, login, password)
 VALUES
-('Dominic', 'Toretto', '+1(555)123-4567', 2, 'dominic', '123456'),
-('Brian', 'Connor', '+1(555)987-6543', 2, 'brian', '123456'),
-('Han', 'Lue', '+1(555)963-2580', 2, 'han', '123456'),
-('Letty', 'Ortiz', '+1(555)246-8102', 2, 'letty', '123456'),
-('Roman', 'Pearce', '+1(555)369-1470', 2, 'roman', '123456'),
-('Tej', 'Parker', '+1(555)159-7534', 2, 'tej', '123456'),
-('Mia', 'Toretto', '+1(555)741-8529', 2, 'mia', '123456'),
-('Gisele', 'Yashar', '+1(555)357-9162', 2, 'gisele', '123456'),
-('Luke', 'Hobbs', '+1(555)918-3726', 2, 'luke', '123456'),
-('Deckard', 'Shaw', '+1(555)827-4935', 2, 'statham', '123456'),
-('Owen', 'Shaw', '+1(555)493-8261', 2, 'owen', '123456');
+('Dominic', 'Toretto', '+1(555)123-4567', 2, 'dominic', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Brian', 'Connor', '+1(555)987-6543', 2, 'brian', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Han', 'Lue', '+1(555)963-2580', 2, 'han', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Letty', 'Ortiz', '+1(555)246-8102', 2, 'letty', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Roman', 'Pearce', '+1(555)369-1470', 2, 'roman', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Tej', 'Parker', '+1(555)159-7534', 2, 'tej', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Mia', 'Toretto', '+1(555)741-8529', 2, 'mia', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Gisele', 'Yashar', '+1(555)357-9162', 2, 'gisele', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Luke', 'Hobbs', '+1(555)918-3726', 2, 'luke', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Deckard', 'Shaw', '+1(555)827-4935', 2, 'statham', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Owen', 'Shaw', '+1(555)493-8261', 2, 'owen', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG');
 
 
 INSERT INTO vehicles (vehicle_registration_number, vehicle_model, vehicle_color, user_id)
