@@ -106,7 +106,7 @@
                 <td>
                     <div class="small_buttons-container">
                         <a th:href="@{${editLink}+${entity.id}}"><button type="button" class="green-btn">Редактировать</button></a>
-                        <a th:idEntity="${entity.id}" onclick="deleteEntity(this)"><button type="button" class="red-btn">Удалить</button></a>
+                        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:idEntity="${entity.id}" onclick="deleteEntity(this)"><button type="button" class="red-btn">Удалить</button></a>
                     </div>
                 </td>
             </tr>
@@ -161,7 +161,7 @@
     <script th:src="@{/js/parkingSlot_deletion.js}"></script>
 </th:block>
 
-<th:block th:if="${entityType == 'Reservation'}">
+<th:block th:if="${entityType == 'Reservation' && #authorization.expression('hasRole(''ADMIN'')')}">
     <script th:src="@{/js/reservation_deletion.js}"></script>
 </th:block>
 

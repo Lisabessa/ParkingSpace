@@ -144,9 +144,10 @@
                 </td>
             </tr>
             <tr th:if="${entityType == 'Reservation'}">
-                <td>ID ТС:</td>
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">ID ТС:</td>
                 <td>
-                    <input type="text" th:field="*{vehicle.id}" id="vehicleId">
+                    <input th:if="${#authorization.expression('hasRole(''ADMIN'')')}" type="text" th:field="*{vehicle.id}" id="vehicleId">
+                    <input th:if="${#authorization.expression('hasRole(''CLIENT'')')}" type="hidden" th:field="*{vehicle.id}" id="vehicleId" >
                 </td>
             </tr>
             <tr th:if="${entityType == 'Reservation'}">

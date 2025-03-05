@@ -21,6 +21,9 @@ public class VehicleService {
         }
         return repo.SearchVehicle(keyword);
     }
+    public List<Vehicle> findByUserId(Long userId){
+        return repo.findByUserId(userId);
+    }
 
     public Vehicle getVehicle(String id) {
         return repo.findById(Long.valueOf(id)).get();

@@ -3,10 +3,13 @@ import com.example.parkingspace.service.*;
 import com.example.parkingspace.model.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -195,6 +198,44 @@ public class AppController {
         mav.addObject("entity", role);
         mav.addObject("entityType", "Role");
         mav.addObject("base_link", "/roles");
+        mav.addObject("option", "edit");
+        return mav;
+    }
+
+    @RequestMapping("/myReservations")
+    public String ViewMyReservationsPage(Model model) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userService.getUserByLogin(username);
+        List<Vehicle> vehicles = vehicleService.findByUserId(user.getId());
+        List<Reservation> myReservations = reservationService.listAll().stream().filter(reservation -> vehicles.stream()
+                .anyMatch(vehicle -> vehicle.getId().equals(reservation.getVehicle().getId()))).collect(Collectors.toList());
+
+        model.addAttribute("listEntities", myReservations);
+        model.addAttribute("newLink", "/myReservations/newMyReservation");
+        model.addAttribute("editLink", "/myReservations/editMyReservation/");
+        model.addAttribute("entityType", "Reservation");
+        model.addAttribute("baseLink", "/myReservations");
+        return "entity_list";
+    }
+
+    @RequestMapping("/myReservations/newMyReservation")
+    public String ViewNewMyReservationPage(Model model) {
+        Reservation reservation = new Reservation();
+        model.addAttribute("entity", reservation);
+        model.addAttribute("entityType", "Reservation");
+        model.addAttribute("base_link", "/myReservations");
+        model.addAttribute("option", "create");
+        return "change_entity";
+    }
+
+    @RequestMapping("/myReservations/editMyReservation/{id}")
+    public ModelAndView editMyReservation(@PathVariable(name = "id") Long id) {
+        ModelAndView mav = new ModelAndView("change_entity");
+        Reservation reservation = reservationService.getReservation(String.valueOf(id));
+        mav.addObject("entity", reservation);
+        mav.addObject("entityType", "Reservation");
+        mav.addObject("base_link", "/myReservations");
         mav.addObject("option", "edit");
         return mav;
     }

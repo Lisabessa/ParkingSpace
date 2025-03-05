@@ -19,6 +19,8 @@
                 <a th:href="@{'/vehicles'}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><button type="button" class="button1">Транспортные средства</button></a>
                 <a th:href="@{'/parkingSlots'}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><button type="button" class="button1">Парковочные места</button></a>
                 <a th:href="@{'/reservations'}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><button type="button" class="button1">Бронирования</button></a>
+
+                <a th:href="@{'/myReservations'}" th:if="${#authorization.expression('hasRole(''CLIENT'')')}"><button type="button" class="button1">Мои бронирования</button></a>
             <div>
 
         </div>

@@ -31,6 +31,10 @@ public class UserService {
         return repo.findById(Long.valueOf(id)).get();
     }
 
+    public User getUserByLogin(String login){
+        return repo.findByLogin(login).get();
+    }
+
     public Optional<User> getUser(Long id){
         return repo.findById(id);
     }

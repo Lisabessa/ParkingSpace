@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/users").hasRole("ADMIN")
                         .requestMatchers("/vehicles").hasRole("ADMIN")
                         .requestMatchers("/reservations").hasRole("ADMIN")
+                        .requestMatchers("/myReservations").hasRole("CLIENT")
                         .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults());

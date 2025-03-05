@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => {
                 if (response.ok) {
                     alert('Бронирование успешно создано.');
-                    window.location.href = "/reservations";
+                    window.location.href = "/";
                 } else {
                     response.text().then(message => {
                         alert('Ошибка при создании бронирования: ' + message);
