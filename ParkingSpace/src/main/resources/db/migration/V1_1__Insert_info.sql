@@ -1,7 +1,7 @@
 INSERT INTO roles (role, code)
 VALUES
-('ADMIN', 777),
-('CLIENT', 700);
+('ROLE_ADMIN', 777),
+('ROLE_CLIENT', 700);
 
 
 INSERT INTO users (first_name, last_name, phone_number, role_id, login, password)
@@ -16,7 +16,8 @@ VALUES
 ('Gisele', 'Yashar', '+1(555)357-9162', 2, 'gisele', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
 ('Luke', 'Hobbs', '+1(555)918-3726', 2, 'luke', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
 ('Deckard', 'Shaw', '+1(555)827-4935', 2, 'statham', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
-('Owen', 'Shaw', '+1(555)493-8261', 2, 'owen', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG');
+('Owen', 'Shaw', '+1(555)493-8261', 2, 'owen', '$2a$10$oBUobb16HFSxmLo2dfKzwOC01zzXCurZHmcXIFe4nVLBvZ7Wh/9uG'),
+('Elizaveta', 'Plavinskaya', 'NONE', 1, 'admin', '$2a$10$y0LcYM82lkFuhrKhqOg90uRBJsnxZ6csBnUhxly0I7jpce9urTtj6');
 
 
 INSERT INTO vehicles (vehicle_registration_number, vehicle_model, vehicle_color, user_id)

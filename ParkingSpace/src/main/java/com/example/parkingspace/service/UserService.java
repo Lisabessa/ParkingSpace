@@ -45,7 +45,10 @@ public class UserService {
 
     public void updateUser(User user) throws Exception {
         User existingUser = repo.findById(Long.valueOf(user.getId())).get();
-        if(!existingUser.getPassword().equals(passwordEncoder().encode(user.getPassword()))){
+        if(user.getPassword().isEmpty()){
+            user.setPassword(existingUser.getPassword());
+        }
+        else if(!existingUser.getPassword().equals(passwordEncoder().encode(user.getPassword()))){
             user.setPassword(passwordEncoder().encode(user.getPassword()));
         }
         repo.save(user);
