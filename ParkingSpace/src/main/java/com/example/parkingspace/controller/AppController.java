@@ -212,22 +212,12 @@ public class AppController {
                 .anyMatch(vehicle -> vehicle.getId().equals(reservation.getVehicle().getId()))).collect(Collectors.toList());
 
         model.addAttribute("listEntities", myReservations);
-        model.addAttribute("newLink", "/myReservations/newMyReservation");
         model.addAttribute("editLink", "/myReservations/editMyReservation/");
         model.addAttribute("entityType", "Reservation");
         model.addAttribute("baseLink", "/myReservations");
         return "entity_list";
     }
 
-    @RequestMapping("/myReservations/newMyReservation")
-    public String ViewNewMyReservationPage(Model model) {
-        Reservation reservation = new Reservation();
-        model.addAttribute("entity", reservation);
-        model.addAttribute("entityType", "Reservation");
-        model.addAttribute("base_link", "/myReservations");
-        model.addAttribute("option", "create");
-        return "change_entity";
-    }
 
     @RequestMapping("/myReservations/editMyReservation/{id}")
     public ModelAndView editMyReservation(@PathVariable(name = "id") Long id) {

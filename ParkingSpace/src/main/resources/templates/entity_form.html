@@ -32,7 +32,7 @@
             <tr th:if="${entityType == 'User' && option == 'edit'}">
                 <td>ID пользователя:</td>
                 <td>
-                    <input type="text" th:field="*{id}"  readonly="readonly" id="idUser">
+                    <input type="text" th:field="*{id}" readonly="readonly" id="idUser">
                 </td>
             </tr>
             <tr th:if="${entityType == 'User'}">
@@ -56,7 +56,7 @@
             <tr th:if="${entityType == 'User'}">
                 <td>ID роли</td>
                 <td>
-                    <input type="text" th:field="*{role.id}" id="roleId">
+                    <input type="text" readonly="readonly" th:field="*{role.id}" id="roleId">
                 </td>
             </tr>
             <tr th:if="${entityType == 'User'}">

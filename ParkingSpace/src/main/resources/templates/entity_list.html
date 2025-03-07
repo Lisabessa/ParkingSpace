@@ -40,7 +40,7 @@
                 <th th:if="${entityType == 'User'}">Номер телефона</th>
                 <th th:if="${entityType == 'User'}">Роль</th>
                 <th th:if="${entityType == 'User'}">Логин</th>
-                <th th:if="${entityType == 'User'}">Пароль</th>
+<!--                <th th:if="${entityType == 'User'}">Пароль</th>-->
 
                 <th th:if="${entityType == 'Vehicle'}">ID ТС</th>
                 <th th:if="${entityType == 'Vehicle'}">Регистрационный номер автомобиля</th>
@@ -79,7 +79,7 @@
                 <th th:if="${entityType == 'User'}" th:text="${entity.phoneNumber}">Номер телефона отсутствует</th>
                 <th th:if="${entityType == 'User'}" th:text="${entity.role.role}">Роль пользователя отсутствует</th>
                 <th th:if="${entityType == 'User'}" th:text="${entity.login}">Логин пользователя отсутствует</th>
-                <th th:if="${entityType == 'User'}" th:text="${entity.password}">Пароль отсутствует</th>
+<!--                <th th:if="${entityType == 'User'}" th:text="${entity.password}">Пароль отсутствует</th>-->
 
                 <th th:if="${entityType == 'Vehicle'}" th:text="${entity.id}">ID ТС отстутсвует</th>
                 <th th:if="${entityType == 'Vehicle'}" th:text="${entity.vehicleRegistrationNumber}">Регистрационный номер автомобиля отсутствует</th>
@@ -127,11 +127,11 @@
         </p>
 
         <div class="buttons-container">
-            <a th:if="${entityType == 'Role'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новую роль</button></a>
-            <a th:if="${entityType == 'User'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
-            <a th:if="${entityType == 'Vehicle'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое транспортное средство</button></a>
-            <a th:if="${entityType == 'ParkingSlot'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
-            <a th:if="${entityType == 'Reservation'}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
+            <a th:if="${entityType == 'Role' && #authorization.expression('hasRole(''ADMIN'')')}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новую роль</button></a>
+            <a th:if="${entityType == 'User' && #authorization.expression('hasRole(''ADMIN'')')}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить нового пользователя</button></a>
+            <a th:if="${entityType == 'Vehicle' && #authorization.expression('hasRole(''ADMIN'')')}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое транспортное средство</button></a>
+            <a th:if="${entityType == 'ParkingSlot' && #authorization.expression('hasRole(''ADMIN'')')}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новый парковочный слот</button></a>
+            <a th:if="${entityType == 'Reservation' && #authorization.expression('hasRole(''ADMIN'')')}" th:href="@{${newLink}}"><button class="button1" type="button" aria-pressed="false" autocomplete="off">Добавить новое бронирование</button></a>
 
             <a href="/"><button class="button2" type="button" aria-pressed="false" autocomplete="off">В меню</button></a>
         </div>
