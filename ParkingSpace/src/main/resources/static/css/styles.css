@@ -176,3 +176,44 @@ p {
     margin: 20px auto; /* Добавляет отступы */
 }
 
+.author-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+
+.author-image {
+    max-width: 200px;
+    border-radius: 20%;
+    margin-bottom: 20px;
+}
+
+.author-info {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.author-info p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.contact-list li {
+    margin-bottom: 5px;
+}
+
+.contact-list a {
+    color: #007bff;
+    text-decoration: none;
+}
