@@ -56,7 +56,8 @@
             <tr th:if="${entityType == 'User'}">
                 <td>ID роли</td>
                 <td>
-                    <input type="text" readonly="readonly" th:field="*{role.id}" id="roleId">
+                    <input th:if="${option == 'edit'}" type="text" readonly="readonly" th:field="*{role.id}" id="roleId">
+                    <input th:if="${option == 'create'}" type="text" th:field="*{role.id}" id="roleId">
                 </td>
             </tr>
             <tr th:if="${entityType == 'User'}">
